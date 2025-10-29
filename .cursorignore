@@ -1,0 +1,148 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.npm
+.yarn/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.next/
+out/
+.cache/
+
+# Large result files and generated data
+**/*_result.json
+**/*result*.json
+container-loading-demo/backend/*_result.json
+container-loading-demo/backend/*result*.json
+optimal_result.json
+guided_packing_result.json
+laff_bin_packing_result.json
+z_first_packing_result.json
+test_api_result.json
+api_test_result.json
+
+# Archive files
+*.7z
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.gz
+
+# Data output and exports
+data/output/**/*
+!data/output/.gitkeep
+data/exports/**/*
+!data/exports/.gitkeep
+data/input/*.json
+!data/input/sample_*.json
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment and config
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+*.env
+
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Docker
+.dockerignore
+
+# Build artifacts
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+*.class
+*.jar
+*.war
+*.ear
+
+# Test coverage
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+.hypothesis/
+*.cover
+*.py,cover
+
+# SSL certificates
+nginx/ssl/*
+!nginx/ssl/.gitkeep
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+*.orig
+
+# Large JSON files (processing results)
+**/demo_*.json
+**/test_*.json
+container-loading-demo/**/*.json
+
+# Output directories
+output/
+exports/
+reports/
+calculations/
+plans/
+
