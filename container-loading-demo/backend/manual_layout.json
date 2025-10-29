@@ -1,0 +1,246 @@
+{
+  "manual_packing_reference": {
+    "total_boxes": 472,
+    "total_rows": 8,
+    "total_length_used": 210,
+    "total_length_available": 473,
+    "utilization_percentage": 44.4,
+    "rows": [
+      {
+        "row": 1,
+        "height": 34.5,
+        "box_count": 60,
+        "cells": [
+          {
+            "cell": 1,
+            "content": "1A+1B+3C+9D+1E+5F",
+            "position": {"x": 0, "y": 0}
+          },
+          {
+            "cell": 2,
+            "content": "3F+13G+1H+1I",
+            "position": {"x": 19, "y": 0}
+          },
+          {
+            "cell": 3,
+            "content": "10I+3J",
+            "position": {"x": 38, "y": 0}
+          },
+          {
+            "cell": 4,
+            "content": "2K+4L+3M",
+            "position": {"x": 57, "y": 0}
+          }
+        ]
+      },
+      {
+        "row": 2,
+        "height": 26.5,
+        "box_count": 47,
+        "cells": [
+          {
+            "cell": 1,
+            "content": "4M+6O",
+            "position": {"x": 0, "y": 34.5}
+          },
+          {
+            "cell": 2,
+            "content": "1N+1P+2Q+6R",
+            "position": {"x": 19, "y": 34.5}
+          },
+          {
+            "cell": 3,
+            "content": "9R",
+            "position": {"x": 38, "y": 34.5}
+          },
+          {
+            "cell": 4,
+            "content": "4R+4S",
+            "position": {"x": 57, "y": 34.5}
+          },
+          {
+            "cell": 5,
+            "content": "5S+1T+2U+2V",
+            "position": {"x": 76, "y": 34.5}
+          }
+        ]
+      },
+      {
+        "row": 3,
+        "height": 26.5,
+        "box_count": 48,
+        "cells": [
+          {
+            "cell": 1,
+            "content": "5V+6W",
+            "position": {"x": 0, "y": 61}
+          },
+          {
+            "cell": 2,
+            "content": "9X",
+            "position": {"x": 19, "y": 61}
+          },
+          {
+            "cell": 3,
+            "content": "1X+7Y",
+            "position": {"x": 38, "y": 61}
+          },
+          {
+            "cell": 4,
+            "content": "4Y+1Z+2A2+2B2+2C2",
+            "position": {"x": 57, "y": 61}
+          },
+          {
+            "cell": 5,
+            "content": "9D2",
+            "position": {"x": 76, "y": 61}
+          }
+        ]
+      },
+      {
+        "row": 4,
+        "height": 16.5,
+        "box_count": 29,
+        "cells": [
+          {
+            "cell": 1,
+            "content": "9D2",
+            "position": {"x": 0, "y": 87.5}
+          },
+          {
+            "cell": 2,
+            "content": "9D2",
+            "position": {"x": 19, "y": 87.5}
+          },
+          {
+            "cell": 3,
+            "content": "1D2+4E2+1F2+5G2",
+            "position": {"x": 38, "y": 87.5}
+          }
+        ]
+      },
+      {
+        "row": 5,
+        "height": 17.5,
+        "box_count": 42,
+        "cells": [
+          {
+            "cell": 1,
+            "content": "9G2",
+            "position": {"x": 0, "y": 104}
+          },
+          {
+            "cell": 2,
+            "content": "5G2+1H2+2I2+5J2",
+            "position": {"x": 19, "y": 104}
+          },
+          {
+            "cell": 3,
+            "content": "19J2",
+            "position": {"x": 38, "y": 104}
+          }
+        ]
+      },
+      {
+        "row": 6,
+        "height": 30.5,
+        "box_count": 95,
+        "cells": [
+          {
+            "cell": 1,
+            "content": "19J2",
+            "position": {"x": 0, "y": 121.5}
+          },
+          {
+            "cell": 2,
+            "content": "19J2",
+            "position": {"x": 19, "y": 121.5}
+          },
+          {
+            "cell": 3,
+            "content": "19J2",
+            "position": {"x": 38, "y": 121.5}
+          },
+          {
+            "cell": 4,
+            "content": "19J2",
+            "position": {"x": 57, "y": 121.5}
+          },
+          {
+            "cell": 5,
+            "content": "19J2",
+            "position": {"x": 76, "y": 121.5}
+          }
+        ]
+      },
+      {
+        "row": 7,
+        "height": 30.5,
+        "box_count": 95,
+        "cells": [
+          {
+            "cell": 1,
+            "content": "19J2",
+            "position": {"x": 0, "y": 152}
+          },
+          {
+            "cell": 2,
+            "content": "19J2",
+            "position": {"x": 19, "y": 152}
+          },
+          {
+            "cell": 3,
+            "content": "13J2+6K2",
+            "position": {"x": 38, "y": 152}
+          },
+          {
+            "cell": 4,
+            "content": "19K2",
+            "position": {"x": 57, "y": 152}
+          },
+          {
+            "cell": 5,
+            "content": "19K2",
+            "position": {"x": 76, "y": 152}
+          }
+        ]
+      },
+      {
+        "row": 8,
+        "height": 17.5,
+        "box_count": 56,
+        "cells": [
+          {
+            "cell": 1,
+            "content": "19K2",
+            "position": {"x": 0, "y": 182.5}
+          },
+          {
+            "cell": 2,
+            "content": "19K2",
+            "position": {"x": 19, "y": 182.5}
+          },
+          {
+            "cell": 3,
+            "content": "18K2",
+            "position": {"x": 38, "y": 182.5}
+          }
+        ]
+      }
+    ]
+  },
+  "key_observations": {
+    "total_length_needed": 210,
+    "length_available": 473,
+    "remaining_space": 263,
+    "notes": "Manual layout sử dụng ~210\" length để pack 472 boxes. Còn lại ~263\" cho GOH (Room for 12 bars with 21.5\")"
+  },
+  "packing_strategy_notes": {
+    "horizontal_packing": "Các boxes được xếp ngang thành nhiều cells, tối ưu chiều rộng container",
+    "vertical_stacking": "Mỗi row có height cố định (17.5\" đến 34.5\"), boxes được stack lên nhau trong cùng cell",
+    "grouping": "Cùng loại box (như J2, K2) được gom lại thành nhiều cells liên tiếp",
+    "dense_packing": "Row 6-8 chứa nhiều boxes cùng loại (J2, K2) với 95 boxes/row",
+    "row_height_variation": "Row heights từ 16.5\" đến 34.5\", phụ thuộc vào height của boxes"
+  }
+}
+

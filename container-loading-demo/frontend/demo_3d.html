@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Container Layout - Bin Packing Visualization</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        
+        .algorithm-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .algorithm-info h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.2em;
+        }
+        
+        .algorithm-info ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .algorithm-info li {
+            margin: 5px 0;
+            opacity: 0.9;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .panel {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .panel h3 {
+            margin-top: 0;
+            color: #495057;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 10px;
+        }
+        
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background: #0056b3;
+        }
+        
+        .btn-success {
+            background: #28a745;
+        }
+        
+        .btn-success:hover {
+            background: #1e7e34;
+        }
+        
+        .grid-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+            max-height: 600px;
+            overflow-y: auto;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .row {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .row-header {
+            background: #667eea;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .cells-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        
+        .cell {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 12px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .cell:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .cell-header {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .cell-content {
+            font-family: 'Courier New', monospace;
+            background: #f8f9fa;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+        
+        .cell-stats {
+            font-size: 12px;
+            color: #6c757d;
+        }
+        
+        .cell.prepack {
+            border-left: 4px solid #28a745;
+        }
+        
+        .cell.carton {
+            border-left: 4px solid #17a2b8;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-card h4 {
+            margin: 0 0 10px 0;
+            color: #495057;
+        }
+        
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #007bff;
+        }
+        
+        .cell-details {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .detail-item {
+            margin: 5px 0;
+            padding: 5px;
+            background: white;
+            border-radius: 4px;
+            border-left: 3px solid #007bff;
+        }
+        
+        .json-display {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        
+        .validation {
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 6px;
+        }
+        
+        .validation.valid {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .validation.invalid {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📦 Container Layout - Bin Packing Visualization</h1>
+            <p>Fill Height First Algorithm với Row-based Layout</p>
+            <div class="algorithm-info">
+                <h3>🎯 Algorithm Features:</h3>
+                <ul>
+                    <li>Fill đầy chiều cao mỗi column/cell trước khi sang column tiếp theo</li>
+                    <li>Output format: 1A+1B+3C+9D+1E+5F (aggregate nhiều items trong 1 cell)</li>
+                    <li>Pre Pack: Vertical stacking only (Zone A-N)</li>
+                    <li>Carton: Flexible packing, maximize items (Zone O-K2)</li>
+                    <li>Group columns thành rows theo height</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="panel">
+                <h3>🎯 Control Panel</h3>
+                <button class="btn btn-success" onclick="loadTestData()">Load Test Data</button>
+                <button class="btn" onclick="calculateLayout()">Calculate Layout</button>
+                <button class="btn" onclick="clearLayout()">Clear Layout</button>
+                
+                <div id="loading" class="loading" style="display: none;">
+                    <p>🔄 Processing layout...</p>
+                </div>
+                
+                <div id="error" class="error" style="display: none;"></div>
+            </div>
+            
+            <div class="panel">
+                <h3>📊 Summary Statistics</h3>
+                <div id="stats" class="stats">
+                    <div class="stat-card">
+                        <h4>Total Boxes</h4>
+                        <div class="stat-value" id="total-boxes">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Space Utilization</h4>
+                        <div class="stat-value" id="utilization">0%</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Rows Used</h4>
+                        <div class="stat-value" id="rows-used">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Pre Pack Boxes</h4>
+                        <div class="stat-value" id="prepack-boxes">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Carton Boxes</h4>
+                        <div class="stat-value" id="carton-boxes">0</div>
+                    </div>
+                </div>
+                
+                <div id="validation" class="validation" style="display: none;">
+                    <h4>Validation Results</h4>
+                    <div id="validation-content"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel" style="margin: 20px;">
+            <h3>🗂️ Bin Packing Layout (Rows & Cells)</h3>
+            <div class="grid-container" id="grid-container">
+                <!-- Rows và cells sẽ được generate bằng JavaScript -->
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="panel">
+                <h3>📍 Cell Details</h3>
+                <div id="cell-details" class="cell-details">
+                    <p>Click on a cell to view details...</p>
+                </div>
+            </div>
+            
+            <div class="panel">
+                <h3>📄 JSON Output</h3>
+                <div id="json-output" class="json-display">
+                    <p>Layout results will appear here...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLayout = null;
+        let testData = null;
+        const API_BASE = 'http://localhost:8000';
+        
+        // Load test data
+        async function loadTestData() {
+            try {
+                showLoading(true);
+                hideError();
+                
+                // Load full test data theo data mẫu thực tế
+                testData = {
+                    "container_config": {
+                        "type": "40HC",
+                        "max_height": 102,
+                        "buffer_per_layer": 0.5
+                    },
+                    "items": [
+                        {
+                            "line": 100,
+                            "purchasing_doc": "4900145614",
+                            "material": "BTAHV-H5B0036",
+                            "destination": "USA",
+                            "building_door": "MIL1",
+                            "ct_code": "CTPK",
+                            "packing_method": "PRE_PACK",
+                            "case_packs": [
+                                {
+                                    "case_pack": "AZ",
+                                    "grid_distribution": {
+                                        "A": {"count": 1},
+                                        "B": {"count": 1}
+                                    }
+                                },
+                                {
+                                    "case_pack": "CI",
+                                    "grid_distribution": {
+                                        "C": {"count": 3},
+                                        "D": {"count": 9}
+                                    }
+                                },
+                                {
+                                    "case_pack": "SC",
+                                    "grid_distribution": {
+                                        "D": {"count": 1}
+                                    }
+                                },
+                                {
+                                    "case_pack": "ST",
+                                    "grid_distribution": {
+                                        "H": {"count": 8},
+                                        "I": {"count": 13}
+                                    }
+                                },
+                                {
+                                    "case_pack": "TM",
+                                    "grid_distribution": {
+                                        "I": {"count": 1},
+                                        "J": {"count": 11}
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "line": 110,
+                            "purchasing_doc": "4900145614",
+                            "material": "HATHP-BS60036",
+                            "destination": "USA",
+                            "building_door": "MIL1",
+                            "ct_code": "CTPK",
+                            "packing_method": "PRE_PACK",
+                            "case_packs": [
+                                {
+                                    "case_pack": "AZ",
+                                    "grid_distribution": {
+                                        "J": {"count": 3},
+                                        "K": {"count": 2}
+                                    }
+                                },
+                                {
+                                    "case_pack": "CI",
+                                    "grid_distribution": {
+                                        "J": {"count": 4},
+                                        "K": {"count": 7},
+                                        "L": {"count": 1},
+                                        "M": {"count": 6},
+                                        "N": {"count": 1}
+                                    }
+                                },
+                                {
+                                    "case_pack": "SC",
+                                    "grid_distribution": {
+                                        "S": {"count": 2}
+                                    }
+                                },
+                                {
+                                    "case_pack": "ST",
+                                    "grid_distribution": {
+                                        "S": {"count": 19},
+                                        "T": {"count": 9},
+                                        "U": {"count": 1},
+                                        "V": {"count": 2},
+                                        "W": {"count": 7},
+                                        "X": {"count": 6}
+                                    }
+                                },
+                                {
+                                    "case_pack": "TM",
+                                    "grid_distribution": {
+                                        "Y": {"count": 10},
+                                        "Z": {"count": 11},
+                                        "A2": {"count": 1},
+                                        "B2": {"count": 2},
+                                        "C2": {"count": 2},
+                                        "D2": {"count": 2}
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "line": 100,
+                            "purchasing_doc": "4900147211",
+                            "material": "BGTAP-BBZ0002",
+                            "destination": "USA",
+                            "building_door": "C1",
+                            "ct_code": "CTB4",
+                            "packing_method": "CARTON",
+                            "case_packs": [
+                                {
+                                    "case_pack": "C2",
+                                    "grid_distribution": {
+                                        "C2": {"count": 28},
+                                        "D2": {"count": 4},
+                                        "E2": {"count": 1}
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "line": 100,
+                            "purchasing_doc": "4900147212",
+                            "material": "BGTAP-BBZ0040",
+                            "destination": "USA",
+                            "building_door": "C1",
+                            "ct_code": "CTB4",
+                            "packing_method": "CARTON",
+                            "case_packs": [
+                                {
+                                    "case_pack": "D2",
+                                    "grid_distribution": {
+                                        "D2": {"count": 19},
+                                        "E2": {"count": 1},
+                                        "F2": {"count": 2}
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "line": 100,
+                            "purchasing_doc": "4900147262",
+                            "material": "FAGNP-C3X0001",
+                            "destination": "USA",
+                            "building_door": "C1",
+                            "ct_code": "CTEXH",
+                            "packing_method": "CARTON",
+                            "case_packs": [
+                                {
+                                    "case_pack": "G2",
+                                    "grid_distribution": {
+                                        "G2": {"count": 170}
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "line": 100,
+                            "purchasing_doc": "4900147263",
+                            "material": "FAGNP-C3X0000",
+                            "destination": "USA",
+                            "building_door": "C1",
+                            "ct_code": "CTEXH",
+                            "packing_method": "CARTON",
+                            "case_packs": [
+                                {
+                                    "case_pack": "H2",
+                                    "grid_distribution": {
+                                        "H2": {"count": 100}
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                };
+                
+                showLoading(false);
+                updateJsonOutput(testData);
+                
+            } catch (error) {
+                showLoading(false);
+                showError('Failed to load test data: ' + error.message);
+            }
+        }
+        
+        // Calculate layout using bin packing API
+        async function calculateLayout() {
+            if (!testData) {
+                showError('Please load test data first');
+                return;
+            }
+            
+            try {
+                showLoading(true);
+                hideError();
+                
+                // Call bin packing API
+                const response = await fetch(`${API_BASE}/calculate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testData)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                currentLayout = await response.json();
+                
+                showLoading(false);
+                displayLayout(currentLayout);
+                
+            } catch (error) {
+                showLoading(false);
+                showError('Failed to calculate layout: ' + error.message);
+            }
+        }
+        
+        // Display layout
+        function displayLayout(layout) {
+            const rows = layout.layout.rows;
+            const summary = layout.layout.summary;
+            const inputSummary = layout.input_summary;
+            
+            // Update statistics
+            document.getElementById('total-boxes').textContent = summary.total_boxes;
+            document.getElementById('utilization').textContent = summary.utilization_rate + '%';
+            document.getElementById('rows-used').textContent = rows.length;
+            document.getElementById('prepack-boxes').textContent = inputSummary.prepack_items;
+            document.getElementById('carton-boxes').textContent = inputSummary.carton_items;
+            
+            // Generate rows layout
+            generateRowsLayout(rows);
+            
+            // Update JSON output
+            updateJsonOutput(layout);
+        }
+        
+        // Generate rows layout visualization
+        function generateRowsLayout(rows) {
+            const container = document.getElementById('grid-container');
+            container.innerHTML = '';
+            
+            rows.forEach(row => {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'row';
+                
+                // Row header
+                const headerDiv = document.createElement('div');
+                headerDiv.className = 'row-header';
+                headerDiv.textContent = `Row ${row.row} (Height ${row.height}")`;
+                rowDiv.appendChild(headerDiv);
+                
+                // Cells container
+                const cellsDiv = document.createElement('div');
+                cellsDiv.className = 'cells-container';
+                
+                row.cells.forEach(cell => {
+                    const cellDiv = document.createElement('div');
+                    cellDiv.className = 'cell';
+                    cellDiv.onclick = () => showCellDetails(cell);
+                    
+                    // Determine zone based on columns
+                    const firstColumn = cell.columns[0];
+                    if (['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'].includes(firstColumn)) {
+                        cellDiv.classList.add('prepack');
+                    } else {
+                        cellDiv.classList.add('carton');
+                    }
+                    
+                    // Cell header
+                    const cellHeaderDiv = document.createElement('div');
+                    cellHeaderDiv.className = 'cell-header';
+                    cellHeaderDiv.textContent = `Cell ${cell.cell} (${cell.columns.join(', ')})`;
+                    cellDiv.appendChild(cellHeaderDiv);
+                    
+                    // Cell content
+                    const contentDiv = document.createElement('div');
+                    contentDiv.className = 'cell-content';
+                    contentDiv.textContent = cell.content;
+                    cellDiv.appendChild(contentDiv);
+                    
+                    // Cell stats
+                    const statsDiv = document.createElement('div');
+                    statsDiv.className = 'cell-stats';
+                    statsDiv.textContent = `${cell.total_boxes} boxes`;
+                    cellDiv.appendChild(statsDiv);
+                    
+                    cellsDiv.appendChild(cellDiv);
+                });
+                
+                rowDiv.appendChild(cellsDiv);
+                container.appendChild(rowDiv);
+            });
+        }
+        
+        // Show cell details
+        function showCellDetails(cell) {
+            const detailsDiv = document.getElementById('cell-details');
+            
+            let html = `<h4>Cell ${cell.cell} Details</h4>`;
+            html += `<p><strong>Columns:</strong> ${cell.columns.join(', ')}</p>`;
+            html += `<p><strong>Content:</strong> ${cell.content}</p>`;
+            html += `<p><strong>Total Boxes:</strong> ${cell.total_boxes}</p>`;
+            
+            if (cell.position) {
+                html += `<p><strong>Position:</strong> x=${cell.position.x}, y=${cell.position.y}, z=${cell.position.z}</p>`;
+            }
+            
+            if (cell.dimensions) {
+                html += `<p><strong>Dimensions:</strong> ${cell.dimensions.width}" x ${cell.dimensions.length}" x ${cell.dimensions.height}"</p>`;
+            }
+            
+            html += '<h5>Items Breakdown:</h5>';
+            cell.items.forEach(item => {
+                html += `
+                    <div class="detail-item">
+                        <strong>${item.id}:</strong> ${item.count} boxes
+                    </div>
+                `;
+            });
+            
+            detailsDiv.innerHTML = html;
+        }
+        
+        // Update JSON output
+        function updateJsonOutput(data) {
+            document.getElementById('json-output').textContent = JSON.stringify(data, null, 2);
+        }
+        
+        // Clear layout
+        function clearLayout() {
+            currentLayout = null;
+            document.getElementById('grid-container').innerHTML = '';
+            document.getElementById('cell-details').innerHTML = '<p>Click on a cell to view details...</p>';
+            document.getElementById('json-output').textContent = 'Layout results will appear here...';
+            
+            // Reset stats
+            document.getElementById('total-boxes').textContent = '0';
+            document.getElementById('utilization').textContent = '0%';
+            document.getElementById('rows-used').textContent = '0';
+            document.getElementById('prepack-boxes').textContent = '0';
+            document.getElementById('carton-boxes').textContent = '0';
+        }
+        
+        // Utility functions
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+        }
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+        
+        function hideError() {
+            document.getElementById('error').style.display = 'none';
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Container Layout Bin Packing Visualization loaded');
+        });
+    </script>
+</body>
+</html>

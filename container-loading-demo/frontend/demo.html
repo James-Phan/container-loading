@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Container Layout Algorithm Demo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .section h3 {
+            margin-top: 0;
+            color: #555;
+        }
+        
+        .input-section {
+            background-color: #f9f9f9;
+        }
+        
+        .output-section {
+            background-color: #f0f8ff;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 200px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            resize: vertical;
+        }
+        
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .grid-container {
+            display: flex;
+            gap: 2px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        
+        .grid-column {
+            width: 35px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            text-align: center;
+            background-color: white;
+        }
+        
+        .column-header {
+            background: #333;
+            color: white;
+            font-weight: bold;
+            font-size: 10px;
+            padding: 2px;
+            border-radius: 2px 2px 0 0;
+        }
+        
+        .column-value {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .prepack-zone {
+            background-color: #d4edda;
+            border-color: #28a745;
+        }
+        
+        .carton-zone {
+            background-color: #d1ecf1;
+            border-color: #17a2b8;
+        }
+        
+        .empty-column {
+            background-color: #f8f9fa;
+            color: #6c757d;
+        }
+        
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .stat-title {
+            font-size: 14px;
+            color: #666;
+            margin: 0 0 5px 0;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+        }
+        
+        .validation-results {
+            margin: 20px 0;
+        }
+        
+        .validation-success {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .validation-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .validation-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            color: #666;
+        }
+        
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            display: none;
+        }
+        
+        .zone-indicator {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        
+        .zone-label {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .prepack-label {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .carton-label {
+            background-color: #17a2b8;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📦 Container Layout Algorithm Demo</h1>
+        <p style="text-align: center; color: #666;">
+            Demo thuật toán sắp xếp layout container cho Peerless
+        </p>
+        
+        <!-- Input Section -->
+        <div class="section input-section">
+            <h3>📝 Input JSON</h3>
+            <textarea id="input" placeholder="Nhập JSON data hoặc click 'Load Sample Data' để test...">
+{
+    "items": [
+        {
+            "purchasing_doc": "4900145614",
+            "material": "BTAHV-H5B0036",
+            "building_door": "MIL1",
+            "packing_method": "PRE_PACK",
+            "height": 25,
+            "carton_count": 14
+        },
+        {
+            "purchasing_doc": "4900145614",
+            "material": "HATHP-BS60036",
+            "building_door": "MIL1",
+            "packing_method": "PRE_PACK",
+            "height": 100,
+            "carton_count": 91
+        },
+        {
+            "purchasing_doc": "4900147211",
+            "material": "BGTAP-BBZ0002",
+            "building_door": "C1",
+            "packing_method": "CARTON",
+            "height": 750,
+            "carton_count": 33
+        }
+    ]
+}
+            </textarea>
+            <div>
+                <button onclick="loadSampleData()">Load Sample Data</button>
+                <button onclick="calculate()" id="calculateBtn">Calculate Layout</button>
+                <button onclick="validateOnly()">Validate Only</button>
+            </div>
+            <div class="loading" id="loading">Đang xử lý...</div>
+            <div class="error-message" id="errorMessage"></div>
+        </div>
+        
+        <!-- Output Section -->
+        <div class="section output-section">
+            <h3>📊 Output Grid Layout</h3>
+            
+            <!-- Zone Indicators -->
+            <div class="zone-indicator">
+                <span class="zone-label prepack-label">PRE PACK ZONE (A-N)</span>
+                <span class="zone-label carton-label">CARTON ZONE (O-K2)</span>
+            </div>
+            
+            <!-- Grid Visualization -->
+            <div id="grid-container" class="grid-container"></div>
+            
+            <!-- Summary Statistics -->
+            <div id="summary-stats" class="summary-stats"></div>
+            
+            <!-- Validation Results -->
+            <div id="validation-results" class="validation-results"></div>
+            
+            <!-- Raw JSON Output -->
+            <h3>📄 Raw JSON Output</h3>
+            <pre id="output" style="background-color: #f8f9fa; padding: 15px; border-radius: 4px; overflow-x: auto;"></pre>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8000';
+        
+        // Load sample data
+        async function loadSampleData() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/test-data`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('input').value = JSON.stringify(data.test_data, null, 2);
+                } else {
+                    showError('Failed to load sample data');
+                }
+            } catch (error) {
+                showError('Error loading sample data: ' + error.message);
+            }
+        }
+        
+        // Calculate layout
+        async function calculate() {
+            const inputText = document.getElementById('input').value.trim();
+            if (!inputText) {
+                showError('Please enter JSON input');
+                return;
+            }
+            
+            try {
+                const input = JSON.parse(inputText);
+                showLoading(true);
+                hideError();
+                
+                const response = await fetch(`${API_BASE_URL}/calculate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(input)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    displayResults(result);
+                } else {
+                    showError('API Error: ' + (result.detail || 'Unknown error'));
+                }
+                
+            } catch (error) {
+                if (error instanceof SyntaxError) {
+                    showError('Invalid JSON format: ' + error.message);
+                } else {
+                    showError('Error: ' + error.message);
+                }
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        // Validate only
+        async function validateOnly() {
+            const inputText = document.getElementById('input').value.trim();
+            if (!inputText) {
+                showError('Please enter JSON input');
+                return;
+            }
+            
+            try {
+                const input = JSON.parse(inputText);
+                showLoading(true);
+                hideError();
+                
+                const response = await fetch(`${API_BASE_URL}/validate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(input)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    displayValidationOnly(result);
+                } else {
+                    showError('API Error: ' + (result.detail || 'Unknown error'));
+                }
+                
+            } catch (error) {
+                if (error instanceof SyntaxError) {
+                    showError('Invalid JSON format: ' + error.message);
+                } else {
+                    showError('Error: ' + error.message);
+                }
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        // Display results
+        function displayResults(result) {
+            // Display grid
+            displayGrid(result.layout.grid);
+            
+            // Display summary
+            displaySummary(result.summary);
+            
+            // Display validation
+            displayValidation(result.validation);
+            
+            // Display raw JSON
+            document.getElementById('output').textContent = JSON.stringify(result, null, 2);
+        }
+        
+        // Display validation only
+        function displayValidationOnly(result) {
+            displayValidation(result.validation);
+            document.getElementById('output').textContent = JSON.stringify(result, null, 2);
+        }
+        
+        // Display grid
+        function displayGrid(grid) {
+            const container = document.getElementById('grid-container');
+            container.innerHTML = '';
+            
+            const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+                            'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+                            'A2', 'B2', 'C2', 'D2', 'E2', 'F2', 'G2', 'H2', 'I2', 'J2', 'K2'];
+            
+            columns.forEach(col => {
+                const value = grid[col] || 0;
+                const colDiv = document.createElement('div');
+                colDiv.className = 'grid-column';
+                
+                // Determine zone
+                const prepackZone = columns.slice(0, 14); // A-N
+                const cartonZone = columns.slice(14); // O-K2
+                
+                if (prepackZone.includes(col)) {
+                    colDiv.classList.add('prepack-zone');
+                } else if (cartonZone.includes(col)) {
+                    colDiv.classList.add('carton-zone');
+                }
+                
+                if (value === 0) {
+                    colDiv.classList.add('empty-column');
+                }
+                
+                colDiv.innerHTML = `
+                    <div class="column-header">${col}</div>
+                    <div class="column-value">${value}</div>
+                `;
+                
+                container.appendChild(colDiv);
+            });
+        }
+        
+        // Display summary statistics
+        function displaySummary(summary) {
+            const container = document.getElementById('summary-stats');
+            container.innerHTML = '';
+            
+            const stats = [
+                { title: 'Total Cartons', value: summary.total_cartons },
+                { title: 'Columns Used', value: summary.columns_used },
+                { title: 'Utilization Rate', value: (summary.utilization_rate * 100).toFixed(1) + '%' },
+                { title: 'Pre Pack Cartons', value: summary.prepack_cartons },
+                { title: 'Carton Items', value: summary.carton_cartons },
+                { title: 'Pre Pack Zone Util', value: (summary.prepack_zone_utilization * 100).toFixed(1) + '%' },
+                { title: 'Carton Zone Util', value: (summary.carton_zone_utilization * 100).toFixed(1) + '%' }
+            ];
+            
+            stats.forEach(stat => {
+                const statDiv = document.createElement('div');
+                statDiv.className = 'stat-card';
+                statDiv.innerHTML = `
+                    <p class="stat-title">${stat.title}</p>
+                    <p class="stat-value">${stat.value}</p>
+                `;
+                container.appendChild(statDiv);
+            });
+        }
+        
+        // Display validation results
+        function displayValidation(validation) {
+            const container = document.getElementById('validation-results');
+            container.innerHTML = '';
+            
+            let validationDiv = document.createElement('div');
+            
+            if (validation.is_valid) {
+                validationDiv.className = 'validation-success';
+                validationDiv.innerHTML = '<strong>✅ Layout Valid</strong><br>All validation checks passed.';
+            } else {
+                validationDiv.className = 'validation-error';
+                validationDiv.innerHTML = '<strong>❌ Layout Invalid</strong><br>' + validation.errors.join('<br>');
+            }
+            
+            if (validation.warnings && validation.warnings.length > 0) {
+                const warningDiv = document.createElement('div');
+                warningDiv.className = 'validation-warning';
+                warningDiv.innerHTML = '<strong>⚠️ Warnings</strong><br>' + validation.warnings.join('<br>');
+                container.appendChild(warningDiv);
+            }
+            
+            container.appendChild(validationDiv);
+        }
+        
+        // Utility functions
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+            document.getElementById('calculateBtn').disabled = show;
+        }
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+        
+        function hideError() {
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+        
+        // Load sample data on page load
+        window.onload = function() {
+            loadSampleData();
+        };
+    </script>
+</body>
+</html>

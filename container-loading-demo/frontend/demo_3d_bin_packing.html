@@ -1,0 +1,1979 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Container Layout - 3D Bin Packing Visualization</title>
+    <!-- Three.js for 3D visualization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .algorithm-info {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .algorithm-info h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .algorithm-info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .algorithm-info li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .algorithm-info li:before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .controls {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #eee;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h4 {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .layout-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .layout-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .grid-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 400px;
+            border: 2px dashed #ddd;
+        }
+
+        /* 3D Viewer Container */
+        #viewer3d-container {
+            width: 100%;
+            height: 600px;
+            position: relative;
+            background: #1a1a1a;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        #viewer3d {
+            width: 100%;
+            height: 100%;
+        }
+
+        .viewer-controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .viewer-controls button {
+            margin: 0 5px;
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .viewer-controls button:hover {
+            background: #f0f0f0;
+        }
+
+        .row {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .row-header {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .cells {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .cell {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 80px;
+            min-height: 60px;
+            text-align: center;
+            /* Cell size will be set dynamically based on actual dimensions */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative; /* For absolute positioning of visual indicators */
+        }
+
+        .cell:hover {
+            background: #e3f2fd;
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .cell.prepack {
+            background: #e8f5e8;
+            border-color: #28a745;
+        }
+
+        .cell.carton {
+            background: #fff3cd;
+            border-color: #ffc107;
+        }
+
+        .cell-content {
+            font-size: 12px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 4px;
+            word-break: break-word;
+        }
+
+        .cell-count {
+            font-size: 10px;
+            color: #666;
+            margin-top: 2px;
+            line-height: 1.3;
+        }
+
+        .details-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .details-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .cell-details {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 400px;
+            border: 2px dashed #ddd;
+        }
+
+        .detail-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .detail-label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            color: #666;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        .modal-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 2em;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .cell-summary h4,
+        .boxes-details h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .cell-summary p {
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .boxes-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .boxes-table th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .boxes-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .boxes-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📦 Container Layout - 3D Bin Packing Visualization</h1>
+            <p>True 3D Bin Packing Algorithm với Buffer Rules theo Peerless specifications</p>
+        </div>
+
+        <div class="algorithm-info">
+            <h3>🎯 Algorithm Features:</h3>
+            <ul>
+                <li>True 3D bin packing với width, length, height optimization</li>
+                <li>Minimize số containers cần dùng</li>
+                <li>Buffer rules: container walls (2.0"), door clearance (6.0"), between items (0.0")</li>
+                <li>Pre Pack: Vertical stacking only (Zone A-N)</li>
+                <li>Carton: Flexible packing, maximize items (Zone O-K2)</li>
+                <li>Output format: 1A+1B+3C+9D+1E+5F (aggregate nhiều items trong 1 cell)</li>
+                <li>Dynamic grid structure based on algorithm optimization</li>
+            </ul>
+        </div>
+
+        <div class="controls">
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="loadTestData()">📊 Load Test Data</button>
+                
+                <label style="display: flex; align-items: center; gap: 10px; padding: 0 10px;">
+                    <span style="font-weight: 500;">Algorithm:</span>
+                    <select id="algorithm-select" style="padding: 8px 12px; border-radius: 6px; border: 1px solid #ddd; font-size: 14px;">
+                        <option value="laff">LAFF (Default)</option>
+                        <option value="guided">Guided (X-First)</option>
+                        <option value="z_first" selected>Z-First (Recommended)</option>
+                    </select>
+                </label>
+                
+                <button class="btn btn-success" onclick="calculateLayout()">🚀 Calculate Layout</button>
+                <button class="btn btn-secondary" onclick="clearLayout()">🗑️ Clear Layout</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Total Boxes</h4>
+                    <div class="stat-value" id="total-boxes">0</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Containers Used</h4>
+                    <div class="stat-value" id="containers-used">0</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Space Utilization</h4>
+                    <div class="stat-value" id="utilization">0%</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Pre Pack Boxes</h4>
+                    <div class="stat-value" id="prepack-boxes">0</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Carton Boxes</h4>
+                    <div class="stat-value" id="carton-boxes">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="layout-section">
+                <h3>🗂️ 3D Bin Packing Layout (Containers & Rows)</h3>
+                
+                <!-- 2D Grid Section -->
+                <h4 style="margin-top: 20px; margin-bottom: 10px; color: #333;">📊 2D Grid View (Clickable Cells)</h4>
+                
+                <!-- 3D Viewer Section -->
+                <h4 style="margin-top: 20px; margin-bottom: 10px; color: #333;">🌐 3D Visualization</h4>
+                <div id="viewer3d-container" style="display: none;">
+                    <div class="viewer-controls">
+                        <button onclick="resetCamera()">Reset View</button>
+                        <button onclick="toggleGrid()">Toggle Grid</button>
+                        <button onclick="toggleWireframe()">Wireframe</button>
+                        <button onclick="toggleFullscreen()">🔍 Fullscreen</button>
+                    </div>
+                    <!-- Color Legend -->
+                    <div id="color-legend" style="position: absolute; bottom: 10px; right: 10px; background: rgba(255, 255, 255, 0.95); padding: 15px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); max-height: 400px; overflow-y: auto; z-index: 10;">
+                        <div style="font-weight: bold; margin-bottom: 10px; font-size: 14px;">📦 Box Code Colors:</div>
+                        <div id="legend-content" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; font-size: 12px;"></div>
+                    </div>
+                    <div id="viewer3d"></div>
+                </div>
+
+                <div id="visual-legend" style="background: #f8f9fa; padding: 15px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd; display: none;">
+                    <div style="font-weight: bold; margin-bottom: 10px;">Visual Indicators:</div>
+                    <div id="legend-content"></div>
+                </div>
+                
+                <div class="grid-container" id="grid-container">
+                    <div class="loading">Click "Load Test Data" và "Calculate Layout" để xem kết quả...</div>
+                </div>
+            </div>
+
+            <div class="details-section">
+                <h3>📍 Container Details</h3>
+                <div id="container-details" class="cell-details">
+                    <p>Click on a container để view details...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentData = null;
+        let currentResult = null;
+
+        async function loadTestData() {
+            // Load test data từ backend API
+            try {
+                showMessage('🔄 Loading test data...', 'loading');
+                
+                const response = await fetch('http://localhost:8000/api/test-data');
+                
+                if (!response.ok) {
+                    // Try local file
+                    const localResponse = await fetch('../backend/test_data_real_3d.json');
+                    currentData = await localResponse.json();
+                } else {
+                    currentData = await response.json();
+                }
+                
+                // Update stats
+                const totalBoxes = currentData.boxes.reduce((sum, box) => sum + box.quantity, 0);
+                const prepackBoxes = currentData.boxes.filter(box => box.packing_method === 'PRE_PACK').reduce((sum, box) => sum + box.quantity, 0);
+                const cartonBoxes = currentData.boxes.filter(box => box.packing_method === 'CARTON').reduce((sum, box) => sum + box.quantity, 0);
+                
+                document.getElementById('total-boxes').textContent = totalBoxes;
+                document.getElementById('prepack-boxes').textContent = prepackBoxes;
+                document.getElementById('carton-boxes').textContent = cartonBoxes;
+                
+                showMessage('✅ Test data loaded successfully!', 'success');
+            } catch (error) {
+                console.error('Error loading test data:', error);
+                showMessage('❌ Failed to load test data! ' + error.message, 'error');
+            }
+        }
+
+        function loadTestDataOld() {
+            // OLD CODE - kept for reference
+            currentData = {
+                    "container": {
+                        "width": 92.5,
+                        "length": 473,
+                        "height": 106
+                    },
+                    "boxes": [
+                    {
+                        "code": "A",
+                        "dimensions": {"width": 19, "length": 34, "height": 3},
+                        "quantity": 1,
+                        "material": "BTAHV-H5B0036",
+                        "case_pack": "AZ",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "B",
+                        "dimensions": {"width": 19, "length": 34, "height": 6},
+                        "quantity": 1,
+                        "material": "BTAHV-H5B0036",
+                        "case_pack": "AZ",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "C",
+                        "dimensions": {"width": 19, "length": 34, "height": 3},
+                        "quantity": 3,
+                        "material": "BTAHV-H5B0036",
+                        "case_pack": "CI",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "D",
+                        "dimensions": {"width": 19, "length": 34, "height": 6},
+                        "quantity": 9,
+                        "material": "BTAHV-H5B0036",
+                        "case_pack": "CI",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "E",
+                        "dimensions": {"width": 19, "length": 34, "height": 6},
+                        "quantity": 1,
+                        "material": "BTAHV-H5B0036",
+                        "case_pack": "SC",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "F",
+                        "dimensions": {"width": 19, "length": 34, "height": 3},
+                        "quantity": 8,
+                        "material": "BTAHV-H5B0036",
+                        "case_pack": "ST",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "G",
+                        "dimensions": {"width": 19, "length": 34, "height": 6},
+                        "quantity": 13,
+                        "material": "BTAHV-H5B0036",
+                        "case_pack": "ST",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "H",
+                        "dimensions": {"width": 19, "length": 34, "height": 3},
+                        "quantity": 1,
+                        "material": "BTAHV-H5B0036",
+                        "case_pack": "TM",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "I",
+                        "dimensions": {"width": 19, "length": 34, "height": 6},
+                        "quantity": 11,
+                        "material": "BTAHV-H5B0036",
+                        "case_pack": "TM",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "J",
+                        "dimensions": {"width": 17, "length": 26, "height": 11},
+                        "quantity": 3,
+                        "material": "HATHP-BS60036",
+                        "case_pack": "AZ",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "K",
+                        "dimensions": {"width": 17, "length": 26, "height": 7.5},
+                        "quantity": 2,
+                        "material": "HATHP-BS60036",
+                        "case_pack": "AZ",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "L",
+                        "dimensions": {"width": 17, "length": 26, "height": 11},
+                        "quantity": 4,
+                        "material": "HATHP-BS60036",
+                        "case_pack": "CI",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "M",
+                        "dimensions": {"width": 17, "length": 26, "height": 12.5},
+                        "quantity": 7,
+                        "material": "HATHP-BS60036",
+                        "case_pack": "CI",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "N",
+                        "dimensions": {"width": 17, "length": 26, "height": 6},
+                        "quantity": 1,
+                        "material": "HATHP-BS60036",
+                        "case_pack": "CI",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "O",
+                        "dimensions": {"width": 17, "length": 26, "height": 7.5},
+                        "quantity": 6,
+                        "material": "HATHP-BS60036",
+                        "case_pack": "CI",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "P",
+                        "dimensions": {"width": 17, "length": 26, "height": 9},
+                        "quantity": 2,
+                        "material": "HATHP-BS60036",
+                        "case_pack": "SC",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "Q",
+                        "dimensions": {"width": 17, "length": 26, "height": 7.5},
+                        "quantity": 19,
+                        "material": "HATHP-BS60036",
+                        "case_pack": "ST",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "R",
+                        "dimensions": {"width": 17, "length": 26, "height": 11},
+                        "quantity": 9,
+                        "material": "HATHP-BS60036",
+                        "case_pack": "ST",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "S",
+                        "dimensions": {"width": 17, "length": 26, "height": 12.5},
+                        "quantity": 1,
+                        "material": "HATHP-BS60036",
+                        "case_pack": "ST",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "T",
+                        "dimensions": {"width": 17, "length": 26, "height": 4.5},
+                        "quantity": 2,
+                        "material": "HATHP-BS60036",
+                        "case_pack": "ST",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "U",
+                        "dimensions": {"width": 17, "length": 26, "height": 6},
+                        "quantity": 7,
+                        "material": "HATHP-BS60036",
+                        "case_pack": "ST",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "V",
+                        "dimensions": {"width": 17, "length": 26, "height": 7.5},
+                        "quantity": 6,
+                        "material": "HATHP-BS60036",
+                        "case_pack": "ST",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "W",
+                        "dimensions": {"width": 17, "length": 26, "height": 9},
+                        "quantity": 10,
+                        "material": "HATHP-BS60036",
+                        "case_pack": "TM",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "X",
+                        "dimensions": {"width": 17, "length": 26, "height": 11},
+                        "quantity": 11,
+                        "material": "HATHP-BS60036",
+                        "case_pack": "TM",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "Y",
+                        "dimensions": {"width": 17, "length": 26, "height": 12.5},
+                        "quantity": 1,
+                        "material": "HATHP-BS60036",
+                        "case_pack": "TM",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "Z",
+                        "dimensions": {"width": 17, "length": 26, "height": 4.5},
+                        "quantity": 2,
+                        "material": "HATHP-BS60036",
+                        "case_pack": "TM",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "A2",
+                        "dimensions": {"width": 17, "length": 26, "height": 6},
+                        "quantity": 2,
+                        "material": "HATHP-BS60036",
+                        "case_pack": "TM",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "B2",
+                        "dimensions": {"width": 17, "length": 26, "height": 7.5},
+                        "quantity": 2,
+                        "material": "HATHP-BS60036",
+                        "case_pack": "TM",
+                        "packing_method": "PRE_PACK",
+                        "purchasing_doc": "4900145614",
+                        "building_door": "MIL1"
+                    },
+                    {
+                        "code": "C2",
+                        "dimensions": {"width": 24, "length": 16, "height": 9},
+                        "quantity": 28,
+                        "material": "BGTAP-BBZ0002",
+                        "case_pack": "C2",
+                        "packing_method": "CARTON",
+                        "purchasing_doc": "4900147211",
+                        "building_door": "C1"
+                    },
+                    {
+                        "code": "D2",
+                        "dimensions": {"width": 24, "length": 16, "height": 10.25},
+                        "quantity": 4,
+                        "material": "BGTAP-BBZ0002",
+                        "case_pack": "C2",
+                        "packing_method": "CARTON",
+                        "purchasing_doc": "4900147211",
+                        "building_door": "C1"
+                    },
+                    {
+                        "code": "E2",
+                        "dimensions": {"width": 24, "length": 16, "height": 6.25},
+                        "quantity": 1,
+                        "material": "BGTAP-BBZ0002",
+                        "case_pack": "C2",
+                        "packing_method": "CARTON",
+                        "purchasing_doc": "4900147211",
+                        "building_door": "C1"
+                    },
+                    {
+                        "code": "F2",
+                        "dimensions": {"width": 24, "length": 16, "height": 3.25},
+                        "quantity": 19,
+                        "material": "BGTAP-BBZ0040",
+                        "case_pack": "D2",
+                        "packing_method": "CARTON",
+                        "purchasing_doc": "4900147212",
+                        "building_door": "C1"
+                    },
+                    {
+                        "code": "G2",
+                        "dimensions": {"width": 24, "length": 16, "height": 10.25},
+                        "quantity": 1,
+                        "material": "BGTAP-BBZ0040",
+                        "case_pack": "D2",
+                        "packing_method": "CARTON",
+                        "purchasing_doc": "4900147212",
+                        "building_door": "C1"
+                    },
+                    {
+                        "code": "H2",
+                        "dimensions": {"width": 24, "length": 16, "height": 6.25},
+                        "quantity": 2,
+                        "material": "BGTAP-BBZ0040",
+                        "case_pack": "D2",
+                        "packing_method": "CARTON",
+                        "purchasing_doc": "4900147212",
+                        "building_door": "C1"
+                    },
+                    {
+                        "code": "I2",
+                        "dimensions": {"width": 30, "length": 17, "height": 5},
+                        "quantity": 170,
+                        "material": "FAGNP-C3X0001",
+                        "case_pack": "G2",
+                        "packing_method": "CARTON",
+                        "purchasing_doc": "4900147262",
+                        "building_door": "C1"
+                    },
+                    {
+                        "code": "J2",
+                        "dimensions": {"width": 30, "length": 17, "height": 5},
+                        "quantity": 100,
+                        "material": "FAGNP-C3X0000",
+                        "case_pack": "H2",
+                        "packing_method": "CARTON",
+                        "purchasing_doc": "4900147263",
+                        "building_door": "C1"
+                    }
+                ]
+            };
+
+            // Update stats
+            const totalBoxes = currentData.boxes.reduce((sum, box) => sum + box.quantity, 0);
+            const prepackBoxes = currentData.boxes.filter(box => box.packing_method === 'PRE_PACK').reduce((sum, box) => sum + box.quantity, 0);
+            const cartonBoxes = currentData.boxes.filter(box => box.packing_method === 'CARTON').reduce((sum, box) => sum + box.quantity, 0);
+
+            document.getElementById('total-boxes').textContent = totalBoxes;
+            document.getElementById('prepack-boxes').textContent = prepackBoxes;
+            document.getElementById('carton-boxes').textContent = cartonBoxes;
+
+            showMessage('✅ Test data loaded successfully!', 'success');
+        }
+
+        async function calculateLayout() {
+            if (!currentData) {
+                showMessage('❌ Please load test data first!', 'error');
+                return;
+            }
+
+            try {
+                showMessage('🔄 Calculating layout...', 'loading');
+
+                // Get selected algorithm
+                const algorithm = document.getElementById('algorithm-select').value;
+                
+                // Add algorithm to request body
+                const requestData = {
+                    ...currentData,
+                    algorithm: algorithm
+                };
+                
+                const response = await fetch('http://localhost:8000/calculate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                currentResult = result;
+
+                if (result.success) {
+                    // Pass algorithm to displayLayout for visual optimization
+                    displayLayout(result.layout, algorithm);
+                    updateStats(result.layout);
+                    updateVisualLegend(algorithm);
+                    
+                    // Render 3D visualization
+                    if (result.layout.containers && result.layout.containers.length > 0) {
+                        render3DLayout(result.layout.containers, algorithm);
+                    }
+                    
+                    showMessage('✅ Layout calculated successfully!', 'success');
+                } else {
+                    showMessage('❌ Layout calculation failed!', 'error');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                showMessage(`❌ Error: ${error.message}`, 'error');
+            }
+        }
+
+        function displayLayout(layout, algorithm = 'laff') {
+            const container = document.getElementById('grid-container');
+            container.innerHTML = '';
+
+            if (!layout.containers || layout.containers.length === 0) {
+                container.innerHTML = '<div class="loading">No containers found</div>';
+                return;
+            }
+
+            layout.containers.forEach((containerData, containerIndex) => {
+                const containerDiv = document.createElement('div');
+                containerDiv.className = 'container-section';
+                containerDiv.style.marginBottom = '30px';
+                containerDiv.style.padding = '20px';
+                containerDiv.style.border = '2px solid #667eea';
+                containerDiv.style.borderRadius = '10px';
+                containerDiv.style.backgroundColor = '#f8f9fa';
+
+                const containerHeader = document.createElement('div');
+                containerHeader.className = 'container-header';
+                containerHeader.style.fontSize = '1.2em';
+                containerHeader.style.fontWeight = 'bold';
+                containerHeader.style.marginBottom = '15px';
+                containerHeader.style.color = '#333';
+                containerHeader.innerHTML = `Container ${containerData.container_id} (Utilization: ${containerData.utilization}%)`;
+                containerDiv.appendChild(containerHeader);
+
+                containerData.rows.forEach((row, rowIndex) => {
+                    const rowDiv = document.createElement('div');
+                    rowDiv.className = 'row';
+                    rowDiv.onclick = () => showContainerDetails(containerData);
+
+                    // Calculate row dimensions (width and length) based on cell dimensions
+                    let rowWidth = 0;
+                    let rowLength = 0;
+                    
+                    if (row.cells && row.cells.length > 0) {
+                        // Sum up width of all cells (horizontal span)
+                        const minX = Math.min(...row.cells.map(cell => cell.position.x));
+                        const maxX = Math.max(...row.cells.map(cell => cell.position.x + (cell.dimensions?.width || 20)));
+                        rowWidth = maxX - minX;
+                        
+                        // Use maximum length among all cells
+                        rowLength = Math.max(...row.cells.map(cell => cell.dimensions?.length || 20));
+                    }
+
+                    const rowHeader = document.createElement('div');
+                    rowHeader.className = 'row-header';
+                    rowHeader.textContent = `Row ${row.row} (Height: ${row.height}", Width: ${rowWidth.toFixed(0)}", Length: ${rowLength.toFixed(0)}")`;
+                    rowDiv.appendChild(rowHeader);
+
+                    const cellsDiv = document.createElement('div');
+                    cellsDiv.className = 'cells';
+
+                    row.cells.forEach((cell, cellIndex) => {
+                        const cellDiv = document.createElement('div');
+                        cellDiv.className = 'cell';
+                        
+                        // Set cell size based on its actual dimensions
+                        // Show proportional width and length to visualize cell sizes
+                        if (cell.dimensions) {
+                            // Normalize scale to fit in reasonable display size
+                            // Find max dimensions across all cells for scaling
+                            let maxWidth = 0;
+                            let maxLength = 0;
+                            layout.containers.forEach(c => {
+                                c.rows.forEach(r => {
+                                    if (r.cells && r.cells.length > 0) {
+                                        r.cells.forEach(cell => {
+                                            if (cell.dimensions) {
+                                                maxWidth = Math.max(maxWidth, cell.dimensions.width);
+                                                maxLength = Math.max(maxLength, cell.dimensions.length);
+                                            }
+                                        });
+                                    }
+                                });
+                            });
+                            
+                            // Scale to reasonable display size (150px max for largest dimension)
+                            const maxDisplaySize = 150;
+                            const scale = maxDisplaySize / Math.max(maxWidth, maxLength);
+                            
+                            // Apply proportional scaling
+                            const cellWidth = Math.max(cell.dimensions.width * scale, 60); // min 60px
+                            const cellLength = Math.max(cell.dimensions.length * scale, 60); // min 60px
+                            
+                            cellDiv.style.width = `${cellWidth}px`;
+                            cellDiv.style.height = `${cellLength}px`;
+                            
+                            // Add 3D effect using box-shadow for height visualization
+                            const heightRatio = cell.dimensions.height / Math.max(maxWidth, maxLength);
+                            cellDiv.style.boxShadow = `0 ${heightRatio * 10}px 15px rgba(0,0,0,0.2)`;
+                        }
+                        
+                        // Determine cell type based on box codes
+                        const hasPrepack = cell.columns.some(code => code >= 'A' && code <= 'N');
+                        const hasCarton = cell.columns.some(code => code >= 'O' && code <= 'K2');
+                        
+                        if (hasPrepack && hasCarton) {
+                            cellDiv.classList.add('mixed');
+                        } else if (hasPrepack) {
+                            cellDiv.classList.add('prepack');
+                        } else if (hasCarton) {
+                            cellDiv.classList.add('carton');
+                        }
+                        
+                        // Algorithm-specific visualization
+                        if (algorithm === 'z_first') {
+                            // Z-First: Visualize height stacking with gradient
+                            if (cell.boxes && cell.boxes.length > 0) {
+                                const zPositions = cell.boxes.map(b => b.position.z).filter(z => z !== undefined);
+                                const minZ = Math.min(...zPositions);
+                                const maxZ = Math.max(...zPositions, 0);
+                                const maxHeight = Math.max(...zPositions.map((z, i) => z + cell.boxes[i].dimensions.height));
+                                
+                                // Create visual indicator for stacking layers
+                                const stackVisual = document.createElement('div');
+                                stackVisual.style.position = 'absolute';
+                                stackVisual.style.top = '5px';
+                                stackVisual.style.right = '5px';
+                                stackVisual.style.background = `linear-gradient(180deg, 
+                                    rgba(102, 126, 234, 0.9) 0%, 
+                                    rgba(102, 126, 234, 0.7) 50%, 
+                                    rgba(102, 126, 234, 0.3) 100%)`;
+                                stackVisual.style.width = '20px';
+                                stackVisual.style.height = `${Math.max(20, (cell.dimensions.height / 106) * 100)}px`;
+                                stackVisual.style.borderRadius = '4px';
+                                stackVisual.style.border = '1px solid #667eea';
+                                stackVisual.title = `Stacked: ${cell.dimensions.height}" tall (Z: ${minZ.toFixed(0)}-${maxHeight.toFixed(0)})`;
+                                cellDiv.appendChild(stackVisual);
+                            }
+                        } else if (algorithm === 'guided') {
+                            // X-First: Visualize width filling with horizontal indicator
+                            if (cell.boxes && cell.boxes.length > 0) {
+                                const xPositions = cell.boxes.map(b => b.position.x).filter(x => x !== undefined);
+                                const uniqueColumns = new Set(xPositions.map(x => Math.round(x / 10) * 10));
+                                
+                                // Create horizontal bars for each X position
+                                uniqueColumns.forEach((xPos, idx) => {
+                                    const bar = document.createElement('div');
+                                    bar.style.position = 'absolute';
+                                    bar.style.bottom = '5px';
+                                    bar.style.left = `${idx * (100 / Array.from(uniqueColumns).length)}%`;
+                                    bar.style.width = `${100 / Array.from(uniqueColumns).length * 0.8}%`;
+                                    bar.style.height = '3px';
+                                    bar.style.background = `hsl(${idx * 60}, 70%, 50%)`;
+                                    bar.style.borderRadius = '2px';
+                                    bar.title = `X-position: ${xPos}"`;
+                                    cellDiv.appendChild(bar);
+                                });
+                            }
+                        }
+                        
+                        // Add click handler to show cell details
+                        cellDiv.onclick = () => showCellDetails(cell);
+
+                        const contentDiv = document.createElement('div');
+                        contentDiv.className = 'cell-content';
+                        contentDiv.textContent = cell.content;
+
+                        const countDiv = document.createElement('div');
+                        countDiv.className = 'cell-count';
+                        // Only show width and length, height is Z-axis (stacking depth)
+                        countDiv.textContent = `${cell.total_boxes} boxes (W:${cell.dimensions.width}" × L:${cell.dimensions.length}" × H:${cell.dimensions.height}")`;
+
+                        cellDiv.appendChild(contentDiv);
+                        cellDiv.appendChild(countDiv);
+                        cellsDiv.appendChild(cellDiv);
+                    });
+
+                    rowDiv.appendChild(cellsDiv);
+                    containerDiv.appendChild(rowDiv);
+                });
+
+                container.appendChild(containerDiv);
+            });
+        }
+
+        function updateStats(layout) {
+            document.getElementById('containers-used').textContent = layout.total_containers || 0;
+            document.getElementById('utilization').textContent = `${layout.overall_utilization || 0}%`;
+        }
+
+        function updateVisualLegend(algorithm) {
+            const legendDiv = document.getElementById('visual-legend');
+            const contentDiv = document.getElementById('legend-content');
+            
+            if (!legendDiv || !contentDiv) return;
+            
+            if (algorithm === 'z_first') {
+                legendDiv.style.display = 'block';
+                contentDiv.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="width: 40px; height: 40px; background: linear-gradient(180deg, rgba(102, 126, 234, 0.9) 0%, rgba(102, 126, 234, 0.3) 100%); border: 1px solid #667eea; border-radius: 4px;"></div>
+                            <span><strong>Gradient bar (right side)</strong>: Shows stacking height (Z-axis). Taller bar = more stacked boxes.</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #667eea;">📊 Strategy: Fill height (Z) first, then move right (X)</span>
+                        </div>
+                    </div>
+                `;
+            } else if (algorithm === 'guided') {
+                legendDiv.style.display = 'block';
+                contentDiv.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="width: 60px; height: 3px; background: hsl(0, 70%, 50%); border-radius: 2px;"></div>
+                            <span><strong>Horizontal bars (bottom)</strong>: Shows X-positions where boxes are placed. Each color = different X column.</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #28a745;">📊 Strategy: Fill width (X) first, then move back (Y)</span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                legendDiv.style.display = 'none';
+            }
+        }
+
+        function showContainerDetails(containerData) {
+            const detailsDiv = document.getElementById('container-details');
+            
+            // Calculate total length used by finding the maximum y position
+            let maxLengthUsed = 0;
+            containerData.rows.forEach(row => {
+                row.cells.forEach(cell => {
+                    if (cell.boxes && cell.boxes.length > 0) {
+                        cell.boxes.forEach(box => {
+                            const maxY = box.position.y + box.dimensions.length;
+                            maxLengthUsed = Math.max(maxLengthUsed, maxY);
+                        });
+                    }
+                });
+            });
+            
+            let html = `
+                <div class="detail-item">
+                    <div class="detail-label">Container ID</div>
+                    <div class="detail-value">${containerData.container_id}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Total Boxes</div>
+                    <div class="detail-value">${containerData.total_boxes}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Utilization</div>
+                    <div class="detail-value">${containerData.utilization}%</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Container Dimensions</div>
+                    <div class="detail-value">${containerData.dimensions.width}" x ${containerData.dimensions.length}" x ${containerData.dimensions.height}"</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Length Used</div>
+                    <div class="detail-value">${maxLengthUsed.toFixed(1)}" / ${containerData.dimensions.length}" (${(maxLengthUsed/containerData.dimensions.length*100).toFixed(1)}%)</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Rows</div>
+                    <div class="detail-value">${containerData.rows.length}</div>
+                </div>
+            `;
+
+            containerData.rows.forEach((row, index) => {
+                html += `
+                    <div class="detail-item">
+                        <div class="detail-label">Row ${row.row}</div>
+                        <div class="detail-value">Height: ${row.height}", Cells: ${row.cells.length}</div>
+                    </div>
+                `;
+            });
+
+            detailsDiv.innerHTML = html;
+        }
+        
+        function showCellDetails(cell) {
+            // Create modal overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'modal-overlay';
+            overlay.onclick = () => overlay.remove();
+            
+            const modal = document.createElement('div');
+            modal.className = 'modal-content';
+            modal.onclick = (e) => e.stopPropagation();
+            
+            let html = `
+                <div class="modal-header">
+                    <h3>Cell ${cell.cell} Details</h3>
+                    <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="cell-summary">
+                        <h4>Summary</h4>
+                        <p><strong>Content:</strong> ${cell.content}</p>
+                        <p><strong>Total Boxes:</strong> ${cell.total_boxes}</p>
+                        <p><strong>Cell Dimensions:</strong> 
+                            <strong>Rộng (Width):</strong> ${(cell.dimensions.width || 0).toFixed(1)}" × 
+                            <strong>Dài (Length):</strong> ${(cell.dimensions.length || 0).toFixed(1)}" × 
+                            <strong>Cao (Height):</strong> ${(cell.dimensions.height || 0).toFixed(1)}"
+                        </p>
+                        <p><strong>Position:</strong> x=${(cell.position.x || 0).toFixed(0)}, y=${(cell.position.y || 0).toFixed(0)}</p>
+                    </div>
+            `;
+            
+            if (cell.boxes && cell.boxes.length > 0) {
+                html += `<div class="boxes-details"><h4>Individual Boxes</h4><table class="boxes-table"><thead><tr><th>Code</th><th>Rộng (Width)</th><th>Dài (Length)</th><th>Cao (Height)</th><th>Position (x,y,z)</th></tr></thead><tbody>`;
+                
+                // Group boxes by X position for color-coding
+                const xGroups = {};
+                cell.boxes.forEach(box => {
+                    const x = Math.round(box.position.x || 0);
+                    if (!xGroups[x]) {
+                        xGroups[x] = [];
+                    }
+                    xGroups[x].push(box);
+                });
+                
+                // Define colors for X positions
+                const colors = [
+                    'rgba(102, 126, 234, 0.1)',  // Blue
+                    'rgba(40, 167, 69, 0.1)',   // Green
+                    'rgba(255, 193, 7, 0.1)',   // Yellow
+                    'rgba(220, 53, 69, 0.1)',   // Red
+                    'rgba(23, 162, 184, 0.1)',  // Cyan
+                ];
+                
+                // Display boxes grouped by X
+                Object.keys(xGroups).sort((a, b) => parseFloat(a) - parseFloat(b)).forEach((x, idx) => {
+                    const color = colors[idx % colors.length];
+                    xGroups[x].forEach(box => {
+                        const width = (box.dimensions.width || 0).toFixed(1);
+                        const length = (box.dimensions.length || 0).toFixed(1);
+                        const height = (box.dimensions.height || 0).toFixed(1);
+                        html += `<tr style="background-color: ${color};">
+                            <td><strong>${box.code}</strong></td>
+                            <td>${width}"</td>
+                            <td>${length}"</td>
+                            <td>${height}"</td>
+                            <td>(${(box.position.x || 0).toFixed(0)}, ${(box.position.y || 0).toFixed(0)}, ${(box.position.z || 0).toFixed(1)})</td>
+                        </tr>`;
+                    });
+                });
+                
+                html += `</tbody></table></div>`;
+            }
+            
+            html += `</div></div>`;
+            
+            modal.innerHTML = html;
+            overlay.appendChild(modal);
+            document.body.appendChild(overlay);
+        }
+
+        function clearLayout() {
+            document.getElementById('grid-container').innerHTML = '<div class="loading">Click "Load Test Data" và "Calculate Layout" để xem kết quả...</div>';
+            document.getElementById('container-details').innerHTML = '<p>Click on a container để view details...</p>';
+            
+            document.getElementById('total-boxes').textContent = '0';
+            document.getElementById('containers-used').textContent = '0';
+            document.getElementById('utilization').textContent = '0%';
+            document.getElementById('prepack-boxes').textContent = '0';
+            document.getElementById('carton-boxes').textContent = '0';
+            
+            currentData = null;
+            currentResult = null;
+            
+            showMessage('🗑️ Layout cleared!', 'success');
+        }
+
+        function showMessage(message, type) {
+            // Remove existing messages
+            const existingMessages = document.querySelectorAll('.message');
+            existingMessages.forEach(msg => msg.remove());
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            messageDiv.textContent = message;
+            
+            const controls = document.querySelector('.controls');
+            controls.appendChild(messageDiv);
+
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 3000);
+        }
+
+        // ==================== 3D Viewer Functions ====================
+        let scene3d, camera3d, renderer3d, controls3d;
+        let boxMeshes3d = [];
+        let showGrid3d = true;
+        let showWireframe = false;
+
+        function init3DViewer() {
+            // Prevent double initialization
+            if (scene3d && renderer3d && camera3d) {
+                console.log('3D viewer already initialized, skipping...');
+                return;
+            }
+
+            const container = document.getElementById('viewer3d');
+            if (!container) {
+                console.error('Viewer container not found');
+                return;
+            }
+
+            console.log('Initializing 3D viewer...');
+
+            // Scene
+            scene3d = new THREE.Scene();
+            scene3d.background = new THREE.Color(0xffffff); // White background for better contrast
+
+            // Camera
+            const width = container.clientWidth || 800;
+            const height = container.clientHeight || 600;
+            
+            camera3d = new THREE.PerspectiveCamera(
+                75,
+                width / height,
+                0.1,
+                10000
+            );
+            // Isometric camera angle (better view like MaxLoad)
+            camera3d.position.set(250, 180, 250);
+            camera3d.lookAt(0, 0, 0);
+
+            // Renderer
+            renderer3d = new THREE.WebGLRenderer({ antialias: true });
+            renderer3d.setSize(width, height);
+            container.appendChild(renderer3d.domElement);
+
+            console.log('Renderer created, size:', width, 'x', height);
+
+            // Controls
+            if (typeof THREE.OrbitControls !== 'undefined') {
+                controls3d = new THREE.OrbitControls(camera3d, renderer3d.domElement);
+                controls3d.enableDamping = true;
+                controls3d.dampingFactor = 0.05;
+                controls3d.enableZoom = true;
+                controls3d.minDistance = 50;
+                controls3d.maxDistance = 1000;
+                controls3d.zoomSpeed = 1.2;
+                // Allow click detection by checking if user is dragging
+                let isDragging = false;
+                let downTime = 0;
+                
+                container.addEventListener('mousedown', () => {
+                    isDragging = false;
+                    downTime = Date.now();
+                });
+                
+                container.addEventListener('mousemove', () => {
+                    if (Date.now() - downTime < 100) {
+                        isDragging = true;
+                    }
+                });
+                
+                console.log('OrbitControls initialized successfully');
+            } else {
+                console.warn('OrbitControls not loaded, using basic controls');
+                // Basic mouse controls with zoom
+                let isDragging = false;
+                let previousMousePosition = { x: 0, y: 0 };
+                
+                container.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    previousMousePosition = { x: e.clientX, y: e.clientY };
+                });
+                
+                container.addEventListener('mouseup', () => {
+                    isDragging = false;
+                });
+                
+                container.addEventListener('mousemove', (e) => {
+                    if (isDragging && camera3d) {
+                        const deltaX = e.clientX - previousMousePosition.x;
+                        const deltaY = e.clientY - previousMousePosition.y;
+                        camera3d.position.x -= deltaX * 0.5;
+                        camera3d.position.y += deltaY * 0.5;
+                        camera3d.lookAt(0, 0, 0);
+                        previousMousePosition = { x: e.clientX, y: e.clientY };
+                    }
+                });
+                
+                // Add zoom with mouse wheel
+                container.addEventListener('wheel', (e) => {
+                    if (camera3d) {
+                        e.preventDefault();
+                        const zoomSpeed = 0.001;
+                        const distance = camera3d.position.length();
+                        const newDistance = distance - e.deltaY * zoomSpeed * distance;
+                        
+                        // Clamp distance
+                        const clampedDistance = Math.max(50, Math.min(1000, newDistance));
+                        camera3d.position.normalize().multiplyScalar(clampedDistance);
+                    }
+                });
+            }
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene3d.add(ambientLight);
+
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(200, 200, 200);
+            scene3d.add(directionalLight);
+
+            const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.3);
+            directionalLight2.position.set(-200, -200, -200);
+            scene3d.add(directionalLight2);
+
+            // Grid - sized to container dimensions (92.5" width, 473" length)
+            // Use darker colors for visibility on white background
+            const gridHelper = new THREE.GridHelper(500, 50, 0x999999, 0xcccccc);
+            gridHelper.position.y = 0; // Grid at bottom
+            scene3d.add(gridHelper);
+
+            // Axes
+            const axesHelper = new THREE.AxesHelper(100);
+            scene3d.add(axesHelper);
+
+            // Animate
+            function animate() {
+                requestAnimationFrame(animate);
+                if (controls3d && typeof controls3d.update === 'function') {
+                    controls3d.update();
+                }
+                if (renderer3d && scene3d && camera3d) {
+                    renderer3d.render(scene3d, camera3d);
+                }
+            }
+            animate();
+
+            // Add click handler for selecting boxes
+            const raycaster = new THREE.Raycaster();
+            const mouse = new THREE.Vector2();
+            let isDraggingControl = false;
+            let mouseDownTime = 0;
+
+            // Track mouse down
+            container.addEventListener('mousedown', () => {
+                isDraggingControl = false;
+                mouseDownTime = Date.now();
+            });
+
+            // Track movement
+            container.addEventListener('mousemove', () => {
+                if (Date.now() - mouseDownTime > 50) {
+                    isDraggingControl = true;
+                }
+            });
+
+            // Handle click (but not if dragging)
+            container.addEventListener('click', (event) => {
+                // Don't process clicks if dragging
+                if (isDraggingControl) {
+                    console.log('Ignoring click - user was dragging');
+                    return;
+                }
+
+                // Calculate mouse position in normalized device coordinates
+                const rect = renderer3d.domElement.getBoundingClientRect();
+                mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+                mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+                console.log('Click detected, raycasting...');
+
+                // Raycast
+                raycaster.setFromCamera(mouse, camera3d);
+                const intersects = raycaster.intersectObjects(boxMeshes3d);
+
+                console.log('Intersects found:', intersects.length);
+
+                if (intersects.length > 0) {
+                    const clickedMesh = intersects[0].object;
+                    if (clickedMesh.userData && clickedMesh.userData.box) {
+                        console.log('Showing details for box:', clickedMesh.userData.box.code);
+                        // Show box details in container details panel
+                        show3DBoxDetails(clickedMesh.userData);
+                    }
+                }
+            });
+
+            // Handle window resize
+            function handleResize() {
+                const width = container.clientWidth || 800;
+                const height = container.clientHeight || 600;
+                camera3d.aspect = width / height;
+                camera3d.updateProjectionMatrix();
+                renderer3d.setSize(width, height);
+            }
+            
+            window.addEventListener('resize', handleResize);
+            
+            // Also listen for fullscreen changes
+            document.addEventListener('fullscreenchange', handleResize);
+            document.addEventListener('webkitfullscreenchange', handleResize);
+            document.addEventListener('msfullscreenchange', handleResize);
+        }
+
+        function render3DLayout(containers, algorithm) {
+            console.log('Rendering 3D layout with', containers.length, 'containers');
+            
+            if (!scene3d || !renderer3d || !camera3d) {
+                console.error('3D viewer not initialized!');
+                return;
+            }
+            
+            // Clear previous boxes
+            boxMeshes3d.forEach(mesh => scene3d.remove(mesh));
+            boxMeshes3d = [];
+
+            containers.forEach(containerData => {
+                containerData.rows.forEach(row => {
+                    row.cells.forEach((cell, cellIdx) => {
+                        if (cell.boxes && cell.boxes.length > 0) {
+                            cell.boxes.forEach((box, boxIdx) => {
+                                const geometry = new THREE.BoxGeometry(
+                                    box.dimensions.width,
+                                    box.dimensions.height,
+                                    box.dimensions.length
+                                );
+
+                                // Color based on box code for better differentiation
+                                const code = box.code || '';
+                                console.log('Box code:', code, 'Box:', box); // Debug
+                                
+                                let color = 0x667eea; // Default blue
+                                
+                                // MaxLoad-inspired vibrant color palette with high contrast
+                                // Colors designed to stand out clearly against white background
+                                const colorMap = {
+                                    'A': 0xff00ff,  // Magenta (vibrant pink)
+                                    'B': 0x0080ff,  // Blue (like MaxLoad)
+                                    'C': 0x00ffff,  // Cyan (bright turquoise)
+                                    'D': 0xff0000,  // Red (bright)
+                                    'E': 0xffff00,  // Yellow (bright)
+                                    'F': 0x00ff00,  // Green (lime bright)
+                                    'G': 0xff8000,  // Orange (bright)
+                                    'H': 0x8000ff,  // Purple (vibrant)
+                                    'I': 0xff80ff,  // Pink (bright)
+                                    'J': 0x00ff80,  // Spring Green
+                                    'K': 0x0000ff,  // Royal Blue
+                                    'L': 0xff0080,  // Hot Pink
+                                    'M': 0x00ffff,  // Aqua
+                                    'N': 0xff8040,  // Orange Red
+                                    'O': 0x00ff40,  // Bright Green
+                                    'P': 0xff00c0,  // Deep Pink
+                                    'Q': 0xff4000,  // Deep Orange
+                                    'R': 0x0080ff,  // Sky Blue
+                                    'S': 0xff40ff,  // Magenta Pink
+                                    'T': 0x40ff00,  // Lime Green
+                                    'U': 0xff0040,  // Crimson Red
+                                    'V': 0x40ffff,  // Light Cyan
+                                    'W': 0xc000ff,  // Violet Purple
+                                    'X': 0xc0ff00,  // Yellow Green
+                                    'Y': 0xffff80,  // Bright Yellow
+                                    'Z': 0xff80c0   // Pink Purple
+                                };
+                                
+                                // Get base color from map or use position-based gradient
+                                let baseColor = colorMap[code];
+                                console.log('Found color for', code, ':', baseColor); // Debug
+                                
+                                // Handle A2, B2, C2, etc. by using base letter
+                                if (!baseColor && code.length > 1) {
+                                    const baseCode = code[0];
+                                    const multiplier = parseInt(code.substring(1)) || 1;
+                                    baseColor = colorMap[baseCode];
+                                    console.log('Trying base code', baseCode, 'found:', baseColor); // Debug
+                                    if (baseColor) {
+                                        // Darken or lighten for variants (A2, A3, etc.)
+                                        const threeColorBase = new THREE.Color(baseColor);
+                                        threeColorBase.lerp(new THREE.Color(0x666666), (multiplier - 1) * 0.1);
+                                        baseColor = threeColorBase.getHex();
+                                    }
+                                }
+                                
+                                if (!baseColor) {
+                                    baseColor = 0x667eea; // Default blue
+                                    console.log('Using default color for', code);
+                                }
+                                
+                                const threeColor = new THREE.Color(baseColor);
+                                console.log('Final color for', code, ':', baseColor.toString(16));
+                                
+                                // Don't apply tint - use colors as-is for maximum contrast
+                                // The algorithm-specific visualization is handled by layout, not color tinting
+                                color = baseColor;
+
+                                const material = new THREE.MeshStandardMaterial({
+                                    color: color,
+                                    metalness: 0.0,  // No metallic for solid colors
+                                    roughness: 1.0,   // Fully matte
+                                    wireframe: showWireframe,
+                                    transparent: true,
+                                    opacity: 0.95  // Almost opaque for high contrast
+                                });
+
+                                const mesh = new THREE.Mesh(geometry, material);
+                                
+                                // Position: X = x, Y = z (height), Z = y (length)
+                                // Note: In THREE.js, Y is up, so we map:
+                                // - box.position.x → mesh.position.x (horizontal)
+                                // - box.position.z → mesh.position.y (vertical/height up)
+                                // - box.position.y → mesh.position.z (depth)
+                                
+                                // Adjust height so boxes sit on the grid (y=0)
+                                mesh.position.set(
+                                    box.position.x,
+                                    box.position.z + box.dimensions.height / 2, // Center height
+                                    box.position.y  // Length/depth
+                                );
+
+                                // Store box data on mesh for click detection
+                                mesh.userData = {
+                                    box: box,
+                                    cell: cell,
+                                    row: row,
+                                    containerData: containerData
+                                };
+
+                                boxMeshes3d.push(mesh);
+                                scene3d.add(mesh);
+                                
+                                // Add edge geometry for visible outlines
+                                const edges = new THREE.EdgesGeometry(geometry);
+                                const lineMaterial = new THREE.LineBasicMaterial({
+                                    color: 0x000000,  // Black outline
+                                    linewidth: 2
+                                });
+                                const line = new THREE.LineSegments(edges, lineMaterial);
+                                mesh.add(line);
+                            });
+                        }
+                    });
+                });
+            });
+
+            // Show both 2D grid and 3D viewer
+            document.getElementById('viewer3d-container').style.display = 'block';
+            document.getElementById('grid-container').style.display = 'block';
+            
+            // Update color legend
+            updateColorLegend(containers);
+        }
+        
+        function updateColorLegend(containers) {
+            const legendContent = document.getElementById('legend-content');
+            if (!legendContent) return;
+            
+            // Collect all unique box codes
+            const boxCodes = new Set();
+            containers.forEach(containerData => {
+                containerData.rows.forEach(row => {
+                    row.cells.forEach(cell => {
+                        if (cell.boxes && cell.boxes.length > 0) {
+                            cell.boxes.forEach(box => {
+                                if (box.code) {
+                                    boxCodes.add(box.code);
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+            
+            // Color map (same as in render3DLayout)
+            const colorMap = {
+                'A': 0xff00ff, 'B': 0x0080ff, 'C': 0x00ffff, 'D': 0xff0000,
+                'E': 0xffff00, 'F': 0x00ff00, 'G': 0xff8000, 'H': 0x8000ff,
+                'I': 0xff80ff, 'J': 0x00ff80, 'K': 0x0000ff, 'L': 0xff0080,
+                'M': 0x00ffff, 'N': 0xff8040, 'O': 0x00ff40, 'P': 0xff00c0,
+                'Q': 0xff4000, 'R': 0x0080ff, 'S': 0xff40ff, 'T': 0x40ff00,
+                'U': 0xff0040, 'V': 0x40ffff, 'W': 0xc000ff, 'X': 0xc0ff00,
+                'Y': 0xffff80, 'Z': 0xff80c0
+            };
+            
+            // Generate legend HTML
+            let legendHTML = '';
+            Array.from(boxCodes).sort().forEach(code => {
+                const color = colorMap[code] || 0x667eea;
+                const colorStr = '#' + color.toString(16).padStart(6, '0');
+                legendHTML += `
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <div style="width: 20px; height: 20px; background: ${colorStr}; border: 1px solid #333; border-radius: 3px;"></div>
+                        <span><strong>${code}</strong></span>
+                    </div>
+                `;
+            });
+            
+            legendContent.innerHTML = legendHTML;
+        }
+
+        function show3DBoxDetails(userData) {
+            const detailsDiv = document.getElementById('container-details');
+            if (!detailsDiv) return;
+
+            const { box, cell, row, containerData } = userData;
+            
+            let html = `
+                <div class="detail-item">
+                    <div class="detail-label">📍 Box Code</div>
+                    <div class="detail-value"><strong>${box.code}</strong></div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Dimensions</div>
+                    <div class="detail-value">${box.dimensions.width}" × ${box.dimensions.length}" × ${box.dimensions.height}"</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Position (X, Y, Z)</div>
+                    <div class="detail-value">(${box.position.x.toFixed(1)}, ${box.position.y.toFixed(1)}, ${box.position.z.toFixed(1)})</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Cell</div>
+                    <div class="detail-value">Row ${row.row}, Cell ${cell.cell}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Container</div>
+                    <div class="detail-value">Container ${containerData.container_id}</div>
+                </div>
+            `;
+
+            if (cell.content) {
+                html += `
+                    <div class="detail-item">
+                        <div class="detail-label">Cell Content</div>
+                        <div class="detail-value">${cell.content}</div>
+                    </div>
+                `;
+            }
+
+            if (cell.boxes && cell.boxes.length > 0) {
+                html += `
+                    <div class="detail-item">
+                        <div class="detail-label">Boxes in Cell</div>
+                        <div class="detail-value">${cell.total_boxes} boxes</div>
+                    </div>
+                `;
+            }
+
+            detailsDiv.innerHTML = html;
+        }
+
+        function resetCamera() {
+            if (camera3d && controls3d) {
+                camera3d.position.set(250, 180, 250);  // Isometric view
+                camera3d.lookAt(0, 0, 0);
+                if (typeof controls3d.reset === 'function') {
+                    controls3d.reset();
+                }
+            }
+        }
+
+        function toggleGrid() {
+            showGrid3d = !showGrid3d;
+            const gridHelper = scene3d.children.find(child => child instanceof THREE.GridHelper);
+            if (gridHelper) {
+                gridHelper.visible = showGrid3d;
+            }
+        }
+
+        function toggleWireframe() {
+            showWireframe = !showWireframe;
+            boxMeshes3d.forEach(mesh => {
+                if (mesh.material) {
+                    mesh.material.wireframe = showWireframe;
+                }
+            });
+        }
+
+        function toggleFullscreen() {
+            const viewerContainer = document.getElementById('viewer3d-container');
+            if (!viewerContainer) return;
+
+            if (!document.fullscreenElement) {
+                // Enter fullscreen
+                if (viewerContainer.requestFullscreen) {
+                    viewerContainer.requestFullscreen();
+                } else if (viewerContainer.webkitRequestFullscreen) {
+                    viewerContainer.webkitRequestFullscreen();
+                } else if (viewerContainer.msRequestFullscreen) {
+                    viewerContainer.msRequestFullscreen();
+                }
+            } else {
+                // Exit fullscreen
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        }
+
+        // Initialize 3D viewer when page loads
+        window.addEventListener('load', () => {
+            console.log('Page loaded, checking THREE.js...');
+            console.log('THREE object:', typeof THREE);
+            
+            if (typeof THREE !== 'undefined') {
+                console.log('THREE.js found, initializing viewer...');
+                init3DViewer();
+            } else {
+                console.error('THREE.js not loaded!');
+            }
+        });
+        
+        // Also try DOMContentLoaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                console.log('DOM loaded, checking THREE.js...');
+                if (typeof THREE !== 'undefined' && !scene3d) {
+                    init3DViewer();
+                }
+            });
+        }
+        // ================================================================
+    </script>
+</body>
+</html>

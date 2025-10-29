@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Container Layout Optimization - Bin Packing Demo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section h2 {
+            color: #333;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .input-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .output-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            resize: vertical;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+        }
+        
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .row-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .row-header {
+            background: #667eea;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .cell {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 8px;
+        }
+        
+        .cell-header {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+        
+        .cell-content {
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .summary {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .summary h3 {
+            margin-top: 0;
+            color: #1976d2;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .summary-label {
+            font-weight: bold;
+        }
+        
+        .summary-value {
+            color: #1976d2;
+        }
+        
+        .error {
+            background: #ffebee;
+            border: 1px solid #f44336;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .success {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Container Layout Optimization</h1>
+            <p>Bin Packing Algorithm - Fill Height First</p>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>Input Data</h2>
+                <div class="input-section">
+                    <textarea id="inputData" placeholder="Paste your JSON data here...">
+{
+  "items": [
+    {
+      "material": "BTAHV-H5B0036",
+      "packing_method": "PRE_PACK",
+      "case_packs": [
+        {
+          "case_pack": "AZ",
+          "grid_distribution": {
+            "A": {"count": 1},
+            "B": {"count": 1}
+          }
+        },
+        {
+          "case_pack": "CI",
+          "grid_distribution": {
+            "C": {"count": 3},
+            "D": {"count": 9}
+          }
+        }
+      ]
+    }
+  ]
+}
+                    </textarea>
+                    <br><br>
+                    <button onclick="calculateLayout()">Calculate Layout</button>
+                    <button onclick="loadSampleData()">Load Sample Data</button>
+                </div>
+            </div>
+            
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Calculating optimal layout...</p>
+            </div>
+            
+            <div class="section" id="results" style="display: none;">
+                <h2>Layout Results</h2>
+                <div class="output-section">
+                    <div id="resultContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        
+        async function calculateLayout() {
+            const inputData = document.getElementById('inputData').value;
+            const loading = document.getElementById('loading');
+            const results = document.getElementById('results');
+            const resultContent = document.getElementById('resultContent');
+            
+            try {
+                // Validate JSON
+                const data = JSON.parse(inputData);
+                
+                // Show loading
+                loading.style.display = 'block';
+                results.style.display = 'none';
+                
+                // Call API
+                const response = await fetch(`${API_BASE}/calculate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                
+                // Hide loading
+                loading.style.display = 'none';
+                
+                // Display results
+                displayResults(result);
+                results.style.display = 'block';
+                
+            } catch (error) {
+                loading.style.display = 'none';
+                resultContent.innerHTML = `
+                    <div class="error">
+                        <h3>Error</h3>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+                results.style.display = 'block';
+            }
+        }
+        
+        function displayResults(result) {
+            const resultContent = document.getElementById('resultContent');
+            
+            if (!result.success) {
+                resultContent.innerHTML = `
+                    <div class="error">
+                        <h3>Calculation Failed</h3>
+                        <p>Unable to calculate layout</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = `
+                <div class="success">
+                    <h3>✅ Layout Calculated Successfully!</h3>
+                </div>
+                
+                <div class="summary">
+                    <h3>Summary</h3>
+                    <div class="summary-item">
+                        <span class="summary-label">Total Boxes:</span>
+                        <span class="summary-value">${result.layout.summary.total_boxes}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Space Utilization:</span>
+                        <span class="summary-value">${result.layout.summary.utilization_rate}%</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Space Used:</span>
+                        <span class="summary-value">${result.layout.summary.space_used}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Space Remaining:</span>
+                        <span class="summary-value">${result.layout.summary.space_remaining}</span>
+                    </div>
+                </div>
+                
+                <div class="result-grid">
+            `;
+            
+            // Display each row
+            result.layout.rows.forEach(row => {
+                html += `
+                    <div class="row-card">
+                        <div class="row-header">
+                            Row ${row.row} (Height ${row.height}")
+                        </div>
+                `;
+                
+                row.cells.forEach(cell => {
+                    html += `
+                        <div class="cell">
+                            <div class="cell-header">Cell ${cell.cell} (${cell.columns.join(', ')})</div>
+                            <div class="cell-content">
+                                <strong>${cell.content}</strong><br>
+                                <small>${cell.total_boxes} boxes</small>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += `</div>`;
+            });
+            
+            html += `</div>`;
+            
+            resultContent.innerHTML = html;
+        }
+        
+        function loadSampleData() {
+            const sampleData = {
+                "items": [
+                    {
+                        "material": "BTAHV-H5B0036",
+                        "packing_method": "PRE_PACK",
+                        "case_packs": [
+                            {
+                                "case_pack": "AZ",
+                                "grid_distribution": {
+                                    "A": {"count": 1},
+                                    "B": {"count": 1}
+                                }
+                            },
+                            {
+                                "case_pack": "CI",
+                                "grid_distribution": {
+                                    "C": {"count": 3},
+                                    "D": {"count": 9}
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "material": "BGTAP-BBZ0002",
+                        "packing_method": "CARTON",
+                        "case_packs": [
+                            {
+                                "case_pack": "C2",
+                                "grid_distribution": {
+                                    "C2": {"count": 10},
+                                    "D2": {"count": 5}
+                                }
+                            }
+                        ]
+                    }
+                ]
+            };
+            
+            document.getElementById('inputData').value = JSON.stringify(sampleData, null, 2);
+        }
+        
+        // Load sample data on page load
+        window.onload = function() {
+            loadSampleData();
+        };
+    </script>
+</body>
+</html>
