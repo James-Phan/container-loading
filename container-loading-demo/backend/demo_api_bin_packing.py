@@ -78,6 +78,24 @@ async def get_test_data():
         with open(file_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
         
+        # Normalize sort_order field: convert to int or None
+        # This ensures compatibility with Pydantic Box model
+        if 'boxes' in data:
+            for box in data['boxes']:
+                if 'sort_order' in box:
+                    # Convert to int if possible, else set to None
+                    try:
+                        if box['sort_order'] is None or box['sort_order'] == '':
+                            box['sort_order'] = None
+                        else:
+                            box['sort_order'] = int(box['sort_order'])
+                    except (ValueError, TypeError):
+                        # If conversion fails, set to None
+                        box['sort_order'] = None
+                else:
+                    # If sort_order field is missing, set to None
+                    box['sort_order'] = None
+        
         return data
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error loading test data: {str(e)}")
