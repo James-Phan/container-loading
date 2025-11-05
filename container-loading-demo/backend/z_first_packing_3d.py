@@ -9,6 +9,7 @@ Strategy:
 """
 
 from typing import List, Dict, Any
+from collections import Counter
 from laff_bin_packing_3d import LAFFBinPacking3D
 
 
@@ -108,6 +109,35 @@ class ZFirstPackingAlgorithm(LAFFBinPacking3D):
                 if not placed_boxes:
                     break
                 
+                # Check if row is too short and retry with alternative dominant_length
+                max_z = max(box['position']['z'] + box['dimensions']['height']
+                           for box in placed_boxes) if placed_boxes else 0
+                
+                if max_z < self.container['height'] * 0.5 and len(placed_boxes) < len(available_boxes) * 0.3:
+                    print(f"  WARNING: Row too short ({max_z:.1f}\"), retrying with alternative dominant_length")
+                    # Get top dominant_length candidates
+                    top_lengths = self.get_top_dominant_lengths(available_boxes, top_n=3)
+                    # Skip first (already tried), try alternatives
+                    retried = False
+                    for alt_length in top_lengths[1:]:  # Skip first (already tried)
+                        print(f"  -> Retrying with dominant_length={alt_length:.1f}\"")
+                        placed_boxes_retry = self.pack_row_z_first(
+                            available_boxes, current_y, self.container['height'], self.container['width'],
+                            dominant_length=alt_length
+                        )
+                        if placed_boxes_retry:
+                            max_z_retry = max(box['position']['z'] + box['dimensions']['height']
+                                            for box in placed_boxes_retry)
+                            # Accept retry if it's better (higher or more boxes)
+                            if max_z_retry > max_z or len(placed_boxes_retry) > len(placed_boxes):
+                                placed_boxes = placed_boxes_retry
+                                max_z = max_z_retry
+                                retried = True
+                                print(f"  -> Retry successful: height={max_z:.1f}\", boxes={len(placed_boxes)}")
+                                break
+                    if not retried:
+                        print(f"  -> Retry did not improve, keeping original result")
+                
                 # Remove placed boxes from remaining_counts
                 placed_by_type = {}
                 for placed_box in placed_boxes:
@@ -154,6 +184,9 @@ class ZFirstPackingAlgorithm(LAFFBinPacking3D):
         
         # PHASE 2: Post-processing optimization - move cells from later rows to earlier rows
         self.containers = self.optimize_rows_by_moving_cells(self.containers)
+        
+        # PHASE 3: Post-processing cell-level height optimization
+        self.containers = self.optimize_cell_heights(self.containers)
         
         return self.containers
     
@@ -239,7 +272,7 @@ class ZFirstPackingAlgorithm(LAFFBinPacking3D):
                 remaining_width = container_width - row_width
                 
                 # Only optimize if remaining_width > threshold
-                threshold = 10.0  # Minimum remaining width to consider optimization
+                threshold = 5.0  # Minimum remaining width to consider optimization (reduced from 10.0)
                 if remaining_width < threshold:
                     continue
                 
@@ -285,10 +318,9 @@ class ZFirstPackingAlgorithm(LAFFBinPacking3D):
                                         for box in cell_boxes)
                         
                         # Check if cell can fit in current row
+                        # Relaxed condition: only check container_height (removed row_max_height restriction)
                         if cell_width <= remaining_width and cell_height <= container_height:
-                            # Check if cell fits within row height (optional - can be relaxed)
-                            if cell_height <= row_max_height or row_max_height == 0:
-                                # Move cell to current row
+                            # Move cell to current row
                                 new_x = row_width
                                 
                                 for box in cell_boxes:
@@ -318,6 +350,138 @@ class ZFirstPackingAlgorithm(LAFFBinPacking3D):
                     # Stop if row is full
                     if remaining_width < threshold:
                         break
+        
+        return containers
+    
+    def optimize_cell_heights(self, containers: List[Dict]) -> List[Dict]:
+        """
+        Post-processing: Fill incomplete cells by moving boxes from later rows
+        
+        Strategy:
+        - Group boxes by rows (Y position) and cells (X position)
+        - Identify incomplete cells (< 80% height) in each row
+        - Try to move boxes from later rows into incomplete cells
+        - Only move if boxes fit AND improve cell height utilization
+        
+        Args:
+            containers: List of containers with packed boxes
+            
+        Returns:
+            List[Dict]: Optimized containers with improved cell heights
+        """
+        if not containers:
+            return containers
+        
+        for container in containers:
+            boxes = container.get('boxes', [])
+            if not boxes:
+                continue
+            
+            container_height = container['dimensions']['height']
+            
+            # Group boxes into rows based on Y position
+            rows_dict = {}
+            tolerance_y = 0.5
+            
+            for box in boxes:
+                y_pos = box['position']['y']
+                row_key = None
+                for key in rows_dict.keys():
+                    if abs(key - y_pos) <= tolerance_y:
+                        row_key = key
+                        break
+                if row_key is None:
+                    row_key = y_pos
+                    rows_dict[row_key] = []
+                rows_dict[row_key].append(box)
+            
+            # Sort rows by Y position (top to bottom)
+            sorted_rows_y = sorted(rows_dict.keys())
+            
+            # Process each row from top to bottom
+            for i, row_y in enumerate(sorted_rows_y):
+                row_boxes = rows_dict[row_y]
+                
+                # Detect incomplete cells in this row
+                incomplete_cells = self.detect_incomplete_cells(
+                    row_boxes, container_height, threshold=0.8
+                )
+                
+                if not incomplete_cells:
+                    continue  # All cells are complete, skip
+                
+                # Try to fill incomplete cells from later rows
+                for j in range(i + 1, len(sorted_rows_y)):
+                    later_row_y = sorted_rows_y[j]
+                    later_row_boxes = rows_dict.get(later_row_y, [])
+                    
+                    if not later_row_boxes:
+                        continue
+                    
+                    # Try to move boxes from later row to incomplete cells
+                    boxes_to_move = []
+                    for incomplete_cell in incomplete_cells:
+                        if incomplete_cell['remaining_height'] < 5.0:
+                            continue  # Skip if too little space
+                        
+                        # Find boxes from later row that can fit in incomplete cell
+                        for box in later_row_boxes:
+                            if box in [b['box'] for b in boxes_to_move]:
+                                continue  # Already marked for moving
+                            
+                            # Check all orientations
+                            for orientation in self.get_all_orientations(box):
+                                box_h = orientation['height']
+                                box_w = orientation['width']
+                                
+                                # Check if fits in incomplete cell
+                                if (box_h <= incomplete_cell['remaining_height'] and
+                                    box_w <= incomplete_cell['width']):
+                                    # Can fit - mark for moving
+                                    boxes_to_move.append({
+                                        'box': box,
+                                        'cell': incomplete_cell,
+                                        'orientation': orientation,
+                                        'target_z': incomplete_cell['height']
+                                    })
+                                    # Update cell height for next boxes
+                                    incomplete_cell['height'] += box_h
+                                    incomplete_cell['remaining_height'] -= box_h
+                                    break
+                        
+                        # Break if cell is full enough
+                        if incomplete_cell['remaining_height'] < 5.0:
+                            incomplete_cells = [c for c in incomplete_cells 
+                                              if c['remaining_height'] >= 5.0]
+                            if not incomplete_cells:
+                                break
+                    
+                    # Move boxes to earlier row cells
+                    for move_info in boxes_to_move:
+                        box = move_info['box']
+                        cell = move_info['cell']
+                        orientation = move_info['orientation']
+                        target_z = move_info['target_z']
+                        
+                        # Update box position and dimensions
+                        box['position']['x'] = cell['x']
+                        box['position']['y'] = row_y
+                        box['position']['z'] = target_z
+                        box['dimensions'] = orientation
+                        
+                        # Move box to earlier row
+                        row_boxes.append(box)
+                        later_row_boxes.remove(box)
+                        
+                        print(f"  -> Moved box to fill cell: height={orientation['height']:.1f}\" "
+                              f"from row Y={later_row_y:.1f} to cell at Y={row_y:.1f}, X={cell['x']:.1f}")
+                    
+                    # Update rows_dict
+                    rows_dict[later_row_y] = later_row_boxes
+                    rows_dict[row_y] = row_boxes
+                    
+                    if not incomplete_cells:
+                        break  # All cells filled, move to next row
         
         return containers
     
@@ -356,8 +520,43 @@ class ZFirstPackingAlgorithm(LAFFBinPacking3D):
         
         return 34.0  # Default fallback
     
+    def get_top_dominant_lengths(self, boxes: List[Dict], top_n: int = 3) -> List[float]:
+        """
+        Get top N dominant length candidates for row packing
+        
+        Args:
+            boxes: List of boxes to analyze
+            top_n: Number of top candidates to return (default: 3)
+            
+        Returns:
+            List[float]: List of dominant lengths sorted by priority (best first)
+        """
+        # Count quantity and unique boxes for each possible length
+        length_counts = {}
+        for box in boxes:
+            for orientation in self.get_all_orientations(box):
+                length = orientation['length']
+                if length not in length_counts:
+                    length_counts[length] = {'count': 0, 'boxes': set()}
+                
+                # Đếm quantity
+                count = box.get('quantity', 1)
+                length_counts[length]['count'] += count
+                length_counts[length]['boxes'].add(box.get('code', ''))
+        
+        if not length_counts:
+            return [34.0]  # Default fallback
+        
+        # Sort by priority: (quantity, number of unique boxes)
+        sorted_lengths = sorted(length_counts.items(), 
+                              key=lambda x: (x[1]['count'], len(x[1]['boxes'])), 
+                              reverse=True)
+        
+        # Return top N lengths
+        return [length for length, _ in sorted_lengths[:top_n]]
+    
     def pack_row_z_first(self, boxes: List[Dict], row_y: float, container_height: float, 
-                         container_width: float) -> List[Dict]:
+                         container_width: float, dominant_length: float = None) -> List[Dict]:
         """
         Pack row using Z-first strategy
         
@@ -373,6 +572,7 @@ class ZFirstPackingAlgorithm(LAFFBinPacking3D):
             row_y: Y position for this row
             container_height: Max height (Z-axis)
             container_width: Max width (X-axis)
+            dominant_length: Optional dominant length to use (if None, will calculate)
             
         Returns:
             List[Dict]: Placed boxes
@@ -391,8 +591,9 @@ class ZFirstPackingAlgorithm(LAFFBinPacking3D):
             -(b['dimensions']['width'] * b['dimensions']['length']),               # Area descending
         ))
         
-        # Determine dominant length for this row
-        dominant_length = self.determine_dominant_length(boxes_sorted)
+        # Determine dominant length for this row (use provided or calculate)
+        if dominant_length is None:
+            dominant_length = self.determine_dominant_length(boxes_sorted)
         
         # Expand all boxes by quantity
         expanded_boxes = []
@@ -405,28 +606,52 @@ class ZFirstPackingAlgorithm(LAFFBinPacking3D):
         
         # Filter boxes: Only keep boxes that have orientations matching dominant_length
         # This ensures row consistency - all cells use same length
-        tolerance = 1.0  # inches - allow small deviation
-        filtered_boxes = []
-        for box in expanded_boxes:
-            valid_orientations = []
-            best_match = None
-            
-            # Try to find exact match first, then closest match within tolerance
-            for orientation in self.get_all_orientations(box):
-                length_diff = abs(orientation['length'] - dominant_length)
+        # DYNAMIC TOLERANCE: Start strict, increase if too restrictive
+        tolerance = 1.0  # inches - allow small deviation (initial strict tolerance)
+        
+        def filter_boxes_with_tolerance(boxes_list, dom_length, tol):
+            """Helper function to filter boxes with given tolerance"""
+            filtered = []
+            for box in boxes_list:
+                valid_orientations = []
+                best_match = None
                 
-                if orientation['length'] == dominant_length:
-                    # Exact match - prefer this
-                    valid_orientations.append(orientation)
-                elif length_diff <= tolerance and (best_match is None or length_diff < abs(best_match['length'] - dominant_length)):
-                    best_match = orientation
-            
-            # If have exact matches, use them
-            if valid_orientations:
-                filtered_boxes.append(box)
-            elif best_match:
-                # Use closest match within tolerance
-                filtered_boxes.append(box)
+                # Try to find exact match first, then closest match within tolerance
+                for orientation in self.get_all_orientations(box):
+                    length_diff = abs(orientation['length'] - dom_length)
+                    
+                    if orientation['length'] == dom_length:
+                        # Exact match - prefer this
+                        valid_orientations.append(orientation)
+                    elif length_diff <= tol and (best_match is None or length_diff < abs(best_match['length'] - dom_length)):
+                        best_match = orientation
+                
+                # If have exact matches, use them
+                if valid_orientations:
+                    filtered.append(box)
+                elif best_match:
+                    # Use closest match within tolerance
+                    filtered.append(box)
+            return filtered
+        
+        # First filter with initial tolerance
+        filtered_boxes = filter_boxes_with_tolerance(expanded_boxes, dominant_length, tolerance)
+        
+        # Check if filter is too restrictive
+        original_count = len(expanded_boxes)
+        filtered_count = len(filtered_boxes)
+        
+        if filtered_count < original_count * 0.5:
+            print(f"  WARNING: Only {filtered_count}/{original_count} boxes pass filter, increasing tolerance to 3.0\"")
+            tolerance = 3.0
+            filtered_boxes = filter_boxes_with_tolerance(expanded_boxes, dominant_length, tolerance)
+            filtered_count = len(filtered_boxes)
+        
+        # Final fallback: use all boxes if still too few
+        if filtered_count < 10:
+            print(f"  WARNING: Too few boxes ({filtered_count}), using all boxes without filter")
+            filtered_boxes = expanded_boxes
+            tolerance = 10.0
         
         # Update expanded_boxes to use filtered list
         expanded_boxes = filtered_boxes
@@ -564,7 +789,143 @@ class ZFirstPackingAlgorithm(LAFFBinPacking3D):
                 # This allows the row to fill more completely before moving to next row
                 continue
         
+        # PHASE 2: Backfill incomplete cells with remaining boxes
+        incomplete_cells = self.detect_incomplete_cells(
+            placed_boxes, container_height, threshold=0.8
+        )
+        
+        if incomplete_cells and len(placed_boxes) < len(expanded_boxes):
+            # Count how many of each box type were placed
+            placed_counts = Counter((b.get('code', ''), b.get('material', '')) 
+                                   for b in placed_boxes)
+            expanded_counts = Counter((b.get('code', ''), b.get('material', '')) 
+                                     for b in expanded_boxes)
+            
+            # Get boxes that haven't been fully placed yet
+            remaining_boxes = []
+            for box in expanded_boxes:
+                key = (box.get('code', ''), box.get('material', ''))
+                if expanded_counts[key] > placed_counts.get(key, 0):
+                    remaining_boxes.append(box)
+                    placed_counts[key] = placed_counts.get(key, 0) + 1  # Track usage
+            
+            # Try to backfill each incomplete cell
+            for cell in incomplete_cells:
+                if cell['remaining_height'] < 5.0:  # Skip if too little space left
+                    continue
+                
+                cell_x = cell['x']
+                cell_y = row_y
+                # Calculate current top Z position from existing boxes in this cell
+                cell_boxes = cell['boxes']
+                cell_current_z = max(box['position']['z'] + box['dimensions']['height'] 
+                                    for box in cell_boxes) if cell_boxes else 0.0
+                remaining_h = container_height - cell_current_z
+                
+                # Try to find boxes that fit in remaining height
+                for box in remaining_boxes[:]:  # Copy list to modify during iteration
+                    best_orientation = None
+                    best_fit_height = 0
+                    
+                    # Check all orientations for this box
+                    for orientation in self.get_all_orientations(box):
+                        box_h = orientation['height']
+                        box_w = orientation['width']
+                        box_l = orientation['length']
+                        
+                        # Check if fits in remaining space
+                        if (box_h <= remaining_h and 
+                            box_w <= cell['width'] and
+                            abs(box_l - dominant_length) <= tolerance):
+                            if box_h > best_fit_height:
+                                best_orientation = orientation
+                                best_fit_height = box_h
+                    
+                    if best_orientation:
+                        # Place box in incomplete cell
+                        placed_box = {
+                            'code': box.get('code', 'UNKNOWN'),
+                            'dimensions': best_orientation,
+                            'position': {
+                                'x': cell_x,
+                                'y': cell_y,
+                                'z': cell_current_z  # Stack on top of existing boxes
+                            },
+                            'material': box.get('material', ''),
+                            'packing_method': box.get('packing_method', 'CARTON')
+                        }
+                        placed_boxes.append(placed_box)
+                        cell_current_z += best_orientation['height']
+                        remaining_h = container_height - cell_current_z
+                        remaining_boxes.remove(box)
+                        
+                        # Stop if cell is full enough
+                        if remaining_h < 5.0:
+                            break
+        
         return placed_boxes
+    
+    def detect_incomplete_cells(self, placed_boxes: List[Dict], 
+                               container_height: float, 
+                               threshold: float = 0.8) -> List[Dict]:
+        """
+        Detect cells that haven't reached minimum height threshold
+        
+        Groups boxes by X position (cells/columns) and identifies cells with
+        height < threshold * container_height.
+        
+        Args:
+            placed_boxes: List of placed boxes
+            container_height: Maximum container height
+            threshold: Minimum height ratio (default: 0.8 = 80%)
+            
+        Returns:
+            List[Dict]: [{x, height, remaining_height, boxes, width}, ...]
+                       List of incomplete cells with their properties
+        """
+        # Group boxes by X position (cells)
+        cells_dict = {}
+        tolerance_x = 0.5
+        
+        for box in placed_boxes:
+            x_pos = box['position']['x']
+            # Find existing cell or create new
+            cell_key = None
+            for key in cells_dict.keys():
+                if abs(key - x_pos) <= tolerance_x:
+                    cell_key = key
+                    break
+            if cell_key is None:
+                cell_key = x_pos
+                cells_dict[cell_key] = []
+            cells_dict[cell_key].append(box)
+        
+        # Calculate height for each cell
+        incomplete_cells = []
+        min_height = container_height * threshold
+        
+        for cell_x, cell_boxes in cells_dict.items():
+            if not cell_boxes:
+                continue
+            
+            cell_height = max(box['position']['z'] + box['dimensions']['height'] 
+                             for box in cell_boxes)
+            
+            if cell_height < min_height:
+                # Calculate cell width
+                cell_width = max(box['position']['x'] + box['dimensions']['width'] 
+                               for box in cell_boxes) - min(box['position']['x'] 
+                                                           for box in cell_boxes)
+                
+                incomplete_cells.append({
+                    'x': cell_x,
+                    'height': cell_height,
+                    'remaining_height': container_height - cell_height,
+                    'boxes': cell_boxes,
+                    'width': cell_width
+                })
+        
+        return incomplete_cells
     
     def get_all_orientations(self, box: Dict) -> List[Dict]:
         """

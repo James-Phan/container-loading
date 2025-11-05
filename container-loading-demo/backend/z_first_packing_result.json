@@ -5,7 +5,7 @@
       "rows": [
         {
           "row": 1,
-          "height": 105.0,
+          "height": 106.0,
           "cells": [
             {
               "cell": 1,
@@ -527,15 +527,17 @@
             },
             {
               "cell": 3,
-              "content": "1A+1B+3C+1E+5F+1H",
-              "total_boxes": 12,
+              "content": "1A+1B+3C+1E+5F+1H+3R+1V",
+              "total_boxes": 16,
               "columns": [
                 "A",
                 "B",
                 "C",
                 "E",
                 "F",
-                "H"
+                "H",
+                "R",
+                "V"
               ],
               "position": {
                 "x": 38.0,
@@ -547,12 +549,14 @@
                 "C": 3,
                 "E": 1,
                 "F": 5,
-                "H": 1
+                "H": 1,
+                "R": 3,
+                "V": 1
               },
               "dimensions": {
                 "width": 19.0,
                 "length": 34.0,
-                "height": 42.0
+                "height": 106.0
               },
               "boxes": [
                 {
@@ -709,6 +713,58 @@
                     "x": 38.0,
                     "y": 10.0,
                     "z": 36.0
+                  }
+                },
+                {
+                  "code": "R",
+                  "dimensions": {
+                    "width": 17,
+                    "length": 26,
+                    "height": 19
+                  },
+                  "position": {
+                    "x": 38.0,
+                    "y": 10.0,
+                    "z": 42.0
+                  }
+                },
+                {
+                  "code": "R",
+                  "dimensions": {
+                    "width": 17,
+                    "length": 26,
+                    "height": 19
+                  },
+                  "position": {
+                    "x": 38.0,
+                    "y": 10.0,
+                    "z": 61.0
+                  }
+                },
+                {
+                  "code": "R",
+                  "dimensions": {
+                    "width": 17,
+                    "length": 26,
+                    "height": 19
+                  },
+                  "position": {
+                    "x": 38.0,
+                    "y": 10.0,
+                    "z": 80.0
+                  }
+                },
+                {
+                  "code": "V",
+                  "dimensions": {
+                    "width": 17,
+                    "length": 26,
+                    "height": 7
+                  },
+                  "position": {
+                    "x": 38.0,
+                    "y": 10.0,
+                    "z": 99.0
                   }
                 }
               ]
@@ -895,8 +951,8 @@
           "cells": [
             {
               "cell": 1,
-              "content": "5R",
-              "total_boxes": 5,
+              "content": "2R",
+              "total_boxes": 2,
               "columns": [
                 "R"
               ],
@@ -905,53 +961,14 @@
                 "y": 44.0
               },
               "items": {
-                "R": 5
+                "R": 2
               },
               "dimensions": {
                 "width": 17.0,
                 "length": 26.0,
-                "height": 95.0
+                "height": 38.0
               },
               "boxes": [
-                {
-                  "code": "R",
-                  "dimensions": {
-                    "width": 17,
-                    "length": 26,
-                    "height": 19
-                  },
-                  "position": {
-                    "x": 34.0,
-                    "y": 44.0,
-                    "z": 0.0
-                  }
-                },
-                {
-                  "code": "R",
-                  "dimensions": {
-                    "width": 17,
-                    "length": 26,
-                    "height": 19
-                  },
-                  "position": {
-                    "x": 34.0,
-                    "y": 44.0,
-                    "z": 19.0
-                  }
-                },
-                {
-                  "code": "R",
-                  "dimensions": {
-                    "width": 17,
-                    "length": 26,
-                    "height": 19
-                  },
-                  "position": {
-                    "x": 34.0,
-                    "y": 44.0,
-                    "z": 38.0
-                  }
-                },
                 {
                   "code": "R",
                   "dimensions": {
@@ -1359,8 +1376,8 @@
             },
             {
               "cell": 2,
-              "content": "9S+3V",
-              "total_boxes": 12,
+              "content": "9S+2V",
+              "total_boxes": 11,
               "columns": [
                 "S",
                 "V"
@@ -1371,7 +1388,7 @@
               },
               "items": {
                 "S": 9,
-                "V": 3
+                "V": 2
               },
               "dimensions": {
                 "width": 17.0,
@@ -1494,19 +1511,6 @@
                     "x": 17.0,
                     "y": 70.0,
                     "z": 72.0
-                  }
-                },
-                {
-                  "code": "V",
-                  "dimensions": {
-                    "width": 17,
-                    "length": 26,
-                    "height": 7
-                  },
-                  "position": {
-                    "x": 17.0,
-                    "y": 70.0,
-                    "z": 81.0
                   }
                 },
                 {
@@ -2112,13 +2116,16 @@
         },
         {
           "row": 4,
-          "height": 24.5,
+          "height": 103.8,
           "cells": [
             {
               "cell": 1,
-              "content": "1K+1N+1P+1T+1Z",
-              "total_boxes": 5,
+              "content": "1K+1N+1P+1T+1Z+2C2+19G2+1I2",
+              "total_boxes": 27,
               "columns": [
+                "C2",
+                "G2",
+                "I2",
                 "K",
                 "N",
                 "P",
@@ -2134,12 +2141,15 @@
                 "N": 1,
                 "P": 1,
                 "T": 1,
-                "Z": 1
+                "Z": 1,
+                "C2": 2,
+                "G2": 19,
+                "I2": 1
               },
               "dimensions": {
                 "width": 17.0,
-                "length": 26.0,
-                "height": 24.5
+                "length": 30.0,
+                "height": 103.8
               },
               "boxes": [
                 {
@@ -2206,113 +2216,297 @@
                     "y": 96.0,
                     "z": 17.0
                   }
+                },
+                {
+                  "code": "C2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 6.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 24.5
+                  }
+                },
+                {
+                  "code": "C2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 6.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 30.75
+                  }
+                },
+                {
+                  "code": "G2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 3.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 37.0
+                  }
+                },
+                {
+                  "code": "G2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 3.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 40.25
+                  }
+                },
+                {
+                  "code": "G2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 3.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 43.5
+                  }
+                },
+                {
+                  "code": "G2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 3.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 46.75
+                  }
+                },
+                {
+                  "code": "G2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 3.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 50.0
+                  }
+                },
+                {
+                  "code": "G2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 3.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 53.25
+                  }
+                },
+                {
+                  "code": "G2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 3.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 56.5
+                  }
+                },
+                {
+                  "code": "G2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 3.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 59.75
+                  }
+                },
+                {
+                  "code": "G2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 3.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 63.0
+                  }
+                },
+                {
+                  "code": "G2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 3.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 66.25
+                  }
+                },
+                {
+                  "code": "G2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 3.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 69.5
+                  }
+                },
+                {
+                  "code": "G2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 3.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 72.75
+                  }
+                },
+                {
+                  "code": "G2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 3.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 76.0
+                  }
+                },
+                {
+                  "code": "G2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 3.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 79.25
+                  }
+                },
+                {
+                  "code": "G2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 3.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 82.5
+                  }
+                },
+                {
+                  "code": "G2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 3.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 85.75
+                  }
+                },
+                {
+                  "code": "G2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 3.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 89.0
+                  }
+                },
+                {
+                  "code": "G2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 3.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 92.25
+                  }
+                },
+                {
+                  "code": "G2",
+                  "dimensions": {
+                    "width": 16,
+                    "length": 24,
+                    "height": 3.25
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 95.5
+                  }
+                },
+                {
+                  "code": "I2",
+                  "dimensions": {
+                    "width": 17,
+                    "length": 30,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 96.0,
+                    "z": 98.75
+                  }
                 }
               ]
             },
             {
               "cell": 2,
-              "content": "2C2",
-              "total_boxes": 2,
-              "columns": [
-                "C2"
-              ],
-              "position": {
-                "x": 17.0,
-                "y": 96.0
-              },
-              "items": {
-                "C2": 2
-              },
-              "dimensions": {
-                "width": 24.0,
-                "length": 16.0,
-                "height": 12.5
-              },
-              "boxes": [
-                {
-                  "code": "C2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 6.25
-                  },
-                  "position": {
-                    "x": 17.0,
-                    "y": 96.0,
-                    "z": 0.0
-                  }
-                },
-                {
-                  "code": "C2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 6.25
-                  },
-                  "position": {
-                    "x": 17.0,
-                    "y": 96.0,
-                    "z": 6.25
-                  }
-                }
-              ]
-            },
-            {
-              "cell": 3,
-              "content": "2J2",
-              "total_boxes": 2,
-              "columns": [
-                "J2"
-              ],
-              "position": {
-                "x": 41.0,
-                "y": 96.0
-              },
-              "items": {
-                "J2": 2
-              },
-              "dimensions": {
-                "width": 30.0,
-                "length": 17.0,
-                "height": 10.0
-              },
-              "boxes": [
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 41.0,
-                    "y": 96.0,
-                    "z": 0.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 41.0,
-                    "y": 96.0,
-                    "z": 5.0
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "row": 5,
-          "height": 101.2,
-          "cells": [
-            {
-              "cell": 1,
               "content": "28D2+1E2",
               "total_boxes": 29,
               "columns": [
@@ -2320,8 +2514,8 @@
                 "E2"
               ],
               "position": {
-                "x": 0.0,
-                "y": 138.0
+                "x": 17.0,
+                "y": 96.0
               },
               "items": {
                 "D2": 28,
@@ -2341,8 +2535,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 0.0
                   }
                 },
@@ -2354,8 +2548,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 3.25
                   }
                 },
@@ -2367,8 +2561,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 6.5
                   }
                 },
@@ -2380,8 +2574,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 9.75
                   }
                 },
@@ -2393,8 +2587,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 13.0
                   }
                 },
@@ -2406,8 +2600,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 16.25
                   }
                 },
@@ -2419,8 +2613,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 19.5
                   }
                 },
@@ -2432,8 +2626,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 22.75
                   }
                 },
@@ -2445,8 +2639,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 26.0
                   }
                 },
@@ -2458,8 +2652,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 29.25
                   }
                 },
@@ -2471,8 +2665,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 32.5
                   }
                 },
@@ -2484,8 +2678,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 35.75
                   }
                 },
@@ -2497,8 +2691,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 39.0
                   }
                 },
@@ -2510,8 +2704,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 42.25
                   }
                 },
@@ -2523,8 +2717,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 45.5
                   }
                 },
@@ -2536,8 +2730,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 48.75
                   }
                 },
@@ -2549,8 +2743,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 52.0
                   }
                 },
@@ -2562,8 +2756,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 55.25
                   }
                 },
@@ -2575,8 +2769,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 58.5
                   }
                 },
@@ -2588,8 +2782,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 61.75
                   }
                 },
@@ -2601,8 +2795,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 65.0
                   }
                 },
@@ -2614,8 +2808,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 68.25
                   }
                 },
@@ -2627,8 +2821,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 71.5
                   }
                 },
@@ -2640,8 +2834,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 74.75
                   }
                 },
@@ -2653,8 +2847,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 78.0
                   }
                 },
@@ -2666,8 +2860,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 81.25
                   }
                 },
@@ -2679,8 +2873,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 84.5
                   }
                 },
@@ -2692,8 +2886,8 @@
                     "height": 3.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 87.75
                   }
                 },
@@ -2705,33 +2899,39 @@
                     "height": 10.25
                   },
                   "position": {
-                    "x": 0.0,
-                    "y": 138.0,
+                    "x": 17.0,
+                    "y": 96.0,
                     "z": 91.0
                   }
                 }
               ]
             },
             {
-              "cell": 2,
-              "content": "3E2+1F2",
-              "total_boxes": 4,
+              "cell": 3,
+              "content": "3E2+1F2+1H2+1I2+11J2",
+              "total_boxes": 17,
               "columns": [
                 "E2",
-                "F2"
+                "F2",
+                "H2",
+                "I2",
+                "J2"
               ],
               "position": {
-                "x": 24.0,
-                "y": 138.0
+                "x": 41.0,
+                "y": 96.0
               },
               "items": {
                 "E2": 3,
-                "F2": 1
+                "F2": 1,
+                "H2": 1,
+                "I2": 1,
+                "J2": 11
               },
               "dimensions": {
                 "width": 24.0,
-                "length": 16.0,
-                "height": 37.0
+                "length": 30.0,
+                "height": 102.0
               },
               "boxes": [
                 {
@@ -2742,8 +2942,8 @@
                     "height": 10.25
                   },
                   "position": {
-                    "x": 24.0,
-                    "y": 138.0,
+                    "x": 41.0,
+                    "y": 96.0,
                     "z": 0.0
                   }
                 },
@@ -2755,8 +2955,8 @@
                     "height": 10.25
                   },
                   "position": {
-                    "x": 24.0,
-                    "y": 138.0,
+                    "x": 41.0,
+                    "y": 96.0,
                     "z": 10.25
                   }
                 },
@@ -2768,8 +2968,8 @@
                     "height": 10.25
                   },
                   "position": {
-                    "x": 24.0,
-                    "y": 138.0,
+                    "x": 41.0,
+                    "y": 96.0,
                     "z": 20.5
                   }
                 },
@@ -2781,308 +2981,22 @@
                     "height": 6.25
                   },
                   "position": {
-                    "x": 24.0,
-                    "y": 138.0,
+                    "x": 41.0,
+                    "y": 96.0,
                     "z": 30.75
                   }
-                }
-              ]
-            },
-            {
-              "cell": 3,
-              "content": "19G2+1H2+2I2",
-              "total_boxes": 22,
-              "columns": [
-                "G2",
-                "H2",
-                "I2"
-              ],
-              "position": {
-                "x": 48.0,
-                "y": 138.0
-              },
-              "items": {
-                "G2": 19,
-                "H2": 1,
-                "I2": 2
-              },
-              "dimensions": {
-                "width": 30.0,
-                "length": 17.0,
-                "height": 76.8
-              },
-              "boxes": [
-                {
-                  "code": "G2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 3.25
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 0.0
-                  }
-                },
-                {
-                  "code": "G2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 3.25
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 3.25
-                  }
-                },
-                {
-                  "code": "G2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 3.25
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 6.5
-                  }
-                },
-                {
-                  "code": "G2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 3.25
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 9.75
-                  }
-                },
-                {
-                  "code": "G2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 3.25
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 13.0
-                  }
-                },
-                {
-                  "code": "G2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 3.25
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 16.25
-                  }
-                },
-                {
-                  "code": "G2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 3.25
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 19.5
-                  }
-                },
-                {
-                  "code": "G2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 3.25
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 22.75
-                  }
-                },
-                {
-                  "code": "G2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 3.25
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 26.0
-                  }
-                },
-                {
-                  "code": "G2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 3.25
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 29.25
-                  }
-                },
-                {
-                  "code": "G2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 3.25
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 32.5
-                  }
-                },
-                {
-                  "code": "G2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 3.25
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 35.75
-                  }
-                },
-                {
-                  "code": "G2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 3.25
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 39.0
-                  }
-                },
-                {
-                  "code": "G2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 3.25
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 42.25
-                  }
-                },
-                {
-                  "code": "G2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 3.25
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 45.5
-                  }
-                },
-                {
-                  "code": "G2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 3.25
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 48.75
-                  }
-                },
-                {
-                  "code": "G2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 3.25
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 52.0
-                  }
-                },
-                {
-                  "code": "G2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 3.25
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 55.25
-                  }
-                },
-                {
-                  "code": "G2",
-                  "dimensions": {
-                    "width": 24,
-                    "length": 16,
-                    "height": 3.25
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 58.5
-                  }
                 },
                 {
                   "code": "I2",
                   "dimensions": {
-                    "width": 30,
-                    "length": 17,
+                    "width": 17,
+                    "length": 30,
                     "height": 5
                   },
                   "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 61.75
-                  }
-                },
-                {
-                  "code": "I2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 48.0,
-                    "y": 138.0,
-                    "z": 66.75
+                    "x": 41.0,
+                    "y": 96.0,
+                    "z": 37.0
                   }
                 },
                 {
@@ -3093,9 +3007,605 @@
                     "height": 5
                   },
                   "position": {
-                    "x": 48.0,
+                    "x": 41.0,
+                    "y": 96.0,
+                    "z": 42.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 17,
+                    "length": 30,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 41.0,
+                    "y": 96.0,
+                    "z": 47.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 17,
+                    "length": 30,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 41.0,
+                    "y": 96.0,
+                    "z": 52.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 17,
+                    "length": 30,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 41.0,
+                    "y": 96.0,
+                    "z": 57.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 17,
+                    "length": 30,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 41.0,
+                    "y": 96.0,
+                    "z": 62.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 17,
+                    "length": 30,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 41.0,
+                    "y": 96.0,
+                    "z": 67.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 17,
+                    "length": 30,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 41.0,
+                    "y": 96.0,
+                    "z": 72.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 17,
+                    "length": 30,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 41.0,
+                    "y": 96.0,
+                    "z": 77.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 17,
+                    "length": 30,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 41.0,
+                    "y": 96.0,
+                    "z": 82.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 17,
+                    "length": 30,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 41.0,
+                    "y": 96.0,
+                    "z": 87.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 17,
+                    "length": 30,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 41.0,
+                    "y": 96.0,
+                    "z": 92.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 17,
+                    "length": 30,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 41.0,
+                    "y": 96.0,
+                    "z": 97.0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 5,
+          "height": 105.0,
+          "cells": [
+            {
+              "cell": 1,
+              "content": "10J2",
+              "total_boxes": 10,
+              "columns": [
+                "J2"
+              ],
+              "position": {
+                "x": 30.0,
+                "y": 138.0
+              },
+              "items": {
+                "J2": 10
+              },
+              "dimensions": {
+                "width": 30.0,
+                "length": 17.0,
+                "height": 50.0
+              },
+              "boxes": [
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
                     "y": 138.0,
-                    "z": 71.75
+                    "z": 55.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 138.0,
+                    "z": 60.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 138.0,
+                    "z": 65.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 138.0,
+                    "z": 70.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 138.0,
+                    "z": 75.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 138.0,
+                    "z": 80.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 138.0,
+                    "z": 85.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 138.0,
+                    "z": 90.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 138.0,
+                    "z": 95.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 138.0,
+                    "z": 100.0
+                  }
+                }
+              ]
+            },
+            {
+              "cell": 2,
+              "content": "21J2",
+              "total_boxes": 21,
+              "columns": [
+                "J2"
+              ],
+              "position": {
+                "x": 60.0,
+                "y": 138.0
+              },
+              "items": {
+                "J2": 21
+              },
+              "dimensions": {
+                "width": 30.0,
+                "length": 17.0,
+                "height": 105.0
+              },
+              "boxes": [
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 0.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 5.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 10.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 15.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 20.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 25.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 30.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 35.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 40.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 45.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 50.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 55.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 60.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 65.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 70.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 75.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 80.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 85.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 90.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 95.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 138.0,
+                    "z": 100.0
                   }
                 }
               ]
@@ -3108,1157 +3618,21 @@
           "cells": [
             {
               "cell": 1,
-              "content": "42J2",
-              "total_boxes": 42,
-              "columns": [
-                "J2"
-              ],
-              "position": {
-                "x": 0.0,
-                "y": 171.0
-              },
-              "items": {
-                "J2": 42
-              },
-              "dimensions": {
-                "width": 30.0,
-                "length": 34.0,
-                "height": 105.0
-              },
-              "boxes": [
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 0.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 5.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 10.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 15.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 20.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 25.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 30.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 35.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 40.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 45.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 50.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 55.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 60.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 65.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 70.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 75.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 80.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 85.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 90.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 95.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 171.0,
-                    "z": 100.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 0.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 5.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 10.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 15.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 20.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 25.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 30.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 35.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 40.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 45.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 50.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 55.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 60.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 65.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 70.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 75.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 80.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 85.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 90.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 95.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 0.0,
-                    "y": 188.0,
-                    "z": 100.0
-                  }
-                }
-              ]
-            },
-            {
-              "cell": 2,
-              "content": "42J2",
-              "total_boxes": 42,
-              "columns": [
-                "J2"
-              ],
-              "position": {
-                "x": 30.0,
-                "y": 171.0
-              },
-              "items": {
-                "J2": 42
-              },
-              "dimensions": {
-                "width": 30.0,
-                "length": 34.0,
-                "height": 105.0
-              },
-              "boxes": [
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 0.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 5.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 10.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 15.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 20.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 25.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 30.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 35.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 40.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 45.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 50.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 55.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 60.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 65.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 70.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 75.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 80.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 85.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 90.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 95.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 171.0,
-                    "z": 100.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 0.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 5.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 10.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 15.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 20.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 25.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 30.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 35.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 40.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 45.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 50.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 55.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 60.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 65.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 70.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 75.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 80.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 85.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 90.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 95.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 188.0,
-                    "z": 100.0
-                  }
-                }
-              ]
-            },
-            {
-              "cell": 3,
-              "content": "42J2",
-              "total_boxes": 42,
+              "content": "21J2",
+              "total_boxes": 21,
               "columns": [
                 "J2"
               ],
               "position": {
                 "x": 60.0,
-                "y": 171.0
+                "y": 155.0
               },
               "items": {
-                "J2": 42
+                "J2": 21
               },
               "dimensions": {
                 "width": 30.0,
-                "length": 34.0,
+                "length": 17.0,
                 "height": 105.0
               },
               "boxes": [
@@ -4271,7 +3645,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 0.0
                   }
                 },
@@ -4284,7 +3658,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 5.0
                   }
                 },
@@ -4297,7 +3671,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 10.0
                   }
                 },
@@ -4310,7 +3684,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 15.0
                   }
                 },
@@ -4323,7 +3697,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 20.0
                   }
                 },
@@ -4336,7 +3710,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 25.0
                   }
                 },
@@ -4349,7 +3723,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 30.0
                   }
                 },
@@ -4362,7 +3736,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 35.0
                   }
                 },
@@ -4375,7 +3749,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 40.0
                   }
                 },
@@ -4388,7 +3762,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 45.0
                   }
                 },
@@ -4401,7 +3775,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 50.0
                   }
                 },
@@ -4414,7 +3788,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 55.0
                   }
                 },
@@ -4427,7 +3801,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 60.0
                   }
                 },
@@ -4440,7 +3814,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 65.0
                   }
                 },
@@ -4453,7 +3827,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 70.0
                   }
                 },
@@ -4466,7 +3840,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 75.0
                   }
                 },
@@ -4479,7 +3853,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 80.0
                   }
                 },
@@ -4492,7 +3866,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 85.0
                   }
                 },
@@ -4505,7 +3879,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 90.0
                   }
                 },
@@ -4518,7 +3892,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
+                    "y": 155.0,
                     "z": 95.0
                   }
                 },
@@ -4531,280 +3905,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 171.0,
-                    "z": 100.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 0.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 5.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 10.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 15.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 20.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 25.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 30.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 35.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 40.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 45.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 50.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 55.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 60.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 65.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 70.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 75.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 80.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 85.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 90.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
-                    "z": 95.0
-                  }
-                },
-                {
-                  "code": "J2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 188.0,
+                    "y": 155.0,
                     "z": 100.0
                   }
                 }
@@ -4818,21 +3919,21 @@
           "cells": [
             {
               "cell": 1,
-              "content": "21J2",
-              "total_boxes": 21,
+              "content": "42J2",
+              "total_boxes": 42,
               "columns": [
                 "J2"
               ],
               "position": {
                 "x": 0.0,
-                "y": 205.0
+                "y": 172.0
               },
               "items": {
-                "J2": 21
+                "J2": 42
               },
               "dimensions": {
                 "width": 30.0,
-                "length": 17.0,
+                "length": 34.0,
                 "height": 105.0
               },
               "boxes": [
@@ -4845,7 +3946,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 0.0
                   }
                 },
@@ -4858,7 +3959,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 5.0
                   }
                 },
@@ -4871,7 +3972,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 10.0
                   }
                 },
@@ -4884,7 +3985,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 15.0
                   }
                 },
@@ -4897,7 +3998,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 20.0
                   }
                 },
@@ -4910,7 +4011,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 25.0
                   }
                 },
@@ -4923,7 +4024,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 30.0
                   }
                 },
@@ -4936,7 +4037,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 35.0
                   }
                 },
@@ -4949,7 +4050,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 40.0
                   }
                 },
@@ -4962,7 +4063,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 45.0
                   }
                 },
@@ -4975,7 +4076,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 50.0
                   }
                 },
@@ -4988,7 +4089,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 55.0
                   }
                 },
@@ -5001,7 +4102,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 60.0
                   }
                 },
@@ -5014,7 +4115,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 65.0
                   }
                 },
@@ -5027,7 +4128,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 70.0
                   }
                 },
@@ -5040,7 +4141,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 75.0
                   }
                 },
@@ -5053,7 +4154,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 80.0
                   }
                 },
@@ -5066,7 +4167,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 85.0
                   }
                 },
@@ -5079,7 +4180,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 90.0
                   }
                 },
@@ -5092,7 +4193,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 95.0
                   }
                 },
@@ -5105,7 +4206,280 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 205.0,
+                    "y": 172.0,
+                    "z": 100.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 0.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 5.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 10.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 15.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 20.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 25.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 30.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 35.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 40.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 45.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 50.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 55.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 60.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 65.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 70.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 75.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 80.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 85.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 90.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
+                    "z": 95.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 189.0,
                     "z": 100.0
                   }
                 }
@@ -5113,21 +4487,21 @@
             },
             {
               "cell": 2,
-              "content": "21J2",
-              "total_boxes": 21,
+              "content": "42J2",
+              "total_boxes": 42,
               "columns": [
                 "J2"
               ],
               "position": {
                 "x": 30.0,
-                "y": 205.0
+                "y": 172.0
               },
               "items": {
-                "J2": 21
+                "J2": 42
               },
               "dimensions": {
                 "width": 30.0,
-                "length": 17.0,
+                "length": 34.0,
                 "height": 105.0
               },
               "boxes": [
@@ -5140,7 +4514,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 0.0
                   }
                 },
@@ -5153,7 +4527,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 5.0
                   }
                 },
@@ -5166,7 +4540,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 10.0
                   }
                 },
@@ -5179,7 +4553,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 15.0
                   }
                 },
@@ -5192,7 +4566,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 20.0
                   }
                 },
@@ -5205,7 +4579,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 25.0
                   }
                 },
@@ -5218,7 +4592,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 30.0
                   }
                 },
@@ -5231,7 +4605,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 35.0
                   }
                 },
@@ -5244,7 +4618,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 40.0
                   }
                 },
@@ -5257,7 +4631,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 45.0
                   }
                 },
@@ -5270,7 +4644,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 50.0
                   }
                 },
@@ -5283,7 +4657,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 55.0
                   }
                 },
@@ -5296,7 +4670,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 60.0
                   }
                 },
@@ -5309,7 +4683,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 65.0
                   }
                 },
@@ -5322,7 +4696,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 70.0
                   }
                 },
@@ -5335,7 +4709,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 75.0
                   }
                 },
@@ -5348,7 +4722,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 80.0
                   }
                 },
@@ -5361,7 +4735,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 85.0
                   }
                 },
@@ -5374,7 +4748,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 90.0
                   }
                 },
@@ -5387,7 +4761,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
                     "z": 95.0
                   }
                 },
@@ -5400,7 +4774,1199 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 205.0,
+                    "y": 172.0,
+                    "z": 100.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 0.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 5.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 10.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 15.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 20.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 25.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 30.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 35.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 40.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 45.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 50.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 55.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 60.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 65.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 70.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 75.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 80.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 85.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 90.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 95.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 189.0,
+                    "z": 100.0
+                  }
+                }
+              ]
+            },
+            {
+              "cell": 3,
+              "content": "23J2+19K2",
+              "total_boxes": 42,
+              "columns": [
+                "J2",
+                "K2"
+              ],
+              "position": {
+                "x": 60.0,
+                "y": 172.0
+              },
+              "items": {
+                "J2": 23,
+                "K2": 19
+              },
+              "dimensions": {
+                "width": 30.0,
+                "length": 34.0,
+                "height": 105.0
+              },
+              "boxes": [
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 0.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 5.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 10.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 15.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 20.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 25.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 30.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 35.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 40.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 45.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 50.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 55.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 60.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 65.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 70.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 75.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 80.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 85.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 90.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 95.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 172.0,
+                    "z": 100.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 0.0
+                  }
+                },
+                {
+                  "code": "J2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 5.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 10.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 15.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 20.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 25.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 30.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 35.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 40.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 45.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 50.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 55.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 60.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 65.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 70.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 75.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 80.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 85.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 90.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 95.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 60.0,
+                    "y": 189.0,
+                    "z": 100.0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 8,
+          "height": 105.0,
+          "cells": [
+            {
+              "cell": 1,
+              "content": "2K2",
+              "total_boxes": 2,
+              "columns": [
+                "K2"
+              ],
+              "position": {
+                "x": 0.0,
+                "y": 206.0
+              },
+              "items": {
+                "K2": 2
+              },
+              "dimensions": {
+                "width": 30.0,
+                "length": 17.0,
+                "height": 10.0
+              },
+              "boxes": [
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 206.0,
+                    "z": 95.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 0.0,
+                    "y": 206.0,
+                    "z": 100.0
+                  }
+                }
+              ]
+            },
+            {
+              "cell": 2,
+              "content": "21K2",
+              "total_boxes": 21,
+              "columns": [
+                "K2"
+              ],
+              "position": {
+                "x": 30.0,
+                "y": 206.0
+              },
+              "items": {
+                "K2": 21
+              },
+              "dimensions": {
+                "width": 30.0,
+                "length": 17.0,
+                "height": 105.0
+              },
+              "boxes": [
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 0.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 5.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 10.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 15.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 20.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 25.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 30.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 35.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 40.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 45.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 50.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 55.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 60.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 65.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 70.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 75.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 80.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 85.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 90.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
+                    "z": 95.0
+                  }
+                },
+                {
+                  "code": "K2",
+                  "dimensions": {
+                    "width": 30,
+                    "length": 17,
+                    "height": 5
+                  },
+                  "position": {
+                    "x": 30.0,
+                    "y": 206.0,
                     "z": 100.0
                   }
                 }
@@ -5415,7 +5981,7 @@
               ],
               "position": {
                 "x": 60.0,
-                "y": 205.0
+                "y": 206.0
               },
               "items": {
                 "K2": 21
@@ -5435,7 +6001,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 0.0
                   }
                 },
@@ -5448,7 +6014,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 5.0
                   }
                 },
@@ -5461,7 +6027,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 10.0
                   }
                 },
@@ -5474,7 +6040,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 15.0
                   }
                 },
@@ -5487,7 +6053,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 20.0
                   }
                 },
@@ -5500,7 +6066,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 25.0
                   }
                 },
@@ -5513,7 +6079,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 30.0
                   }
                 },
@@ -5526,7 +6092,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 35.0
                   }
                 },
@@ -5539,7 +6105,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 40.0
                   }
                 },
@@ -5552,7 +6118,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 45.0
                   }
                 },
@@ -5565,7 +6131,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 50.0
                   }
                 },
@@ -5578,7 +6144,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 55.0
                   }
                 },
@@ -5591,7 +6157,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 60.0
                   }
                 },
@@ -5604,7 +6170,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 65.0
                   }
                 },
@@ -5617,7 +6183,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 70.0
                   }
                 },
@@ -5630,7 +6196,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 75.0
                   }
                 },
@@ -5643,7 +6209,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 80.0
                   }
                 },
@@ -5656,7 +6222,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 85.0
                   }
                 },
@@ -5669,7 +6235,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 90.0
                   }
                 },
@@ -5682,7 +6248,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
+                    "y": 206.0,
                     "z": 95.0
                   }
                 },
@@ -5695,603 +6261,7 @@
                   },
                   "position": {
                     "x": 60.0,
-                    "y": 205.0,
-                    "z": 100.0
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "row": 8,
-          "height": 105.0,
-          "cells": [
-            {
-              "cell": 1,
-              "content": "21K2",
-              "total_boxes": 21,
-              "columns": [
-                "K2"
-              ],
-              "position": {
-                "x": 30.0,
-                "y": 222.0
-              },
-              "items": {
-                "K2": 21
-              },
-              "dimensions": {
-                "width": 30.0,
-                "length": 17.0,
-                "height": 105.0
-              },
-              "boxes": [
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 0.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 5.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 10.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 15.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 20.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 25.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 30.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 35.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 40.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 45.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 50.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 55.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 60.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 65.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 70.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 75.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 80.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 85.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 90.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 95.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 30.0,
-                    "y": 222.0,
-                    "z": 100.0
-                  }
-                }
-              ]
-            },
-            {
-              "cell": 2,
-              "content": "21K2",
-              "total_boxes": 21,
-              "columns": [
-                "K2"
-              ],
-              "position": {
-                "x": 60.0,
-                "y": 222.0
-              },
-              "items": {
-                "K2": 21
-              },
-              "dimensions": {
-                "width": 30.0,
-                "length": 17.0,
-                "height": 105.0
-              },
-              "boxes": [
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 0.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 5.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 10.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 15.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 20.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 25.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 30.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 35.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 40.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 45.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 50.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 55.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 60.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 65.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 70.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 75.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 80.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 85.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 90.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
-                    "z": 95.0
-                  }
-                },
-                {
-                  "code": "K2",
-                  "dimensions": {
-                    "width": 30,
-                    "length": 17,
-                    "height": 5
-                  },
-                  "position": {
-                    "x": 60.0,
-                    "y": 222.0,
+                    "y": 206.0,
                     "z": 100.0
                   }
                 }
@@ -6312,7 +6282,7 @@
               ],
               "position": {
                 "x": 0.0,
-                "y": 239.0
+                "y": 223.0
               },
               "items": {
                 "K2": 21
@@ -6332,7 +6302,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 0.0
                   }
                 },
@@ -6345,7 +6315,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 5.0
                   }
                 },
@@ -6358,7 +6328,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 10.0
                   }
                 },
@@ -6371,7 +6341,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 15.0
                   }
                 },
@@ -6384,7 +6354,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 20.0
                   }
                 },
@@ -6397,7 +6367,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 25.0
                   }
                 },
@@ -6410,7 +6380,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 30.0
                   }
                 },
@@ -6423,7 +6393,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 35.0
                   }
                 },
@@ -6436,7 +6406,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 40.0
                   }
                 },
@@ -6449,7 +6419,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 45.0
                   }
                 },
@@ -6462,7 +6432,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 50.0
                   }
                 },
@@ -6475,7 +6445,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 55.0
                   }
                 },
@@ -6488,7 +6458,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 60.0
                   }
                 },
@@ -6501,7 +6471,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 65.0
                   }
                 },
@@ -6514,7 +6484,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 70.0
                   }
                 },
@@ -6527,7 +6497,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 75.0
                   }
                 },
@@ -6540,7 +6510,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 80.0
                   }
                 },
@@ -6553,7 +6523,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 85.0
                   }
                 },
@@ -6566,7 +6536,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 90.0
                   }
                 },
@@ -6579,7 +6549,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 95.0
                   }
                 },
@@ -6592,7 +6562,7 @@
                   },
                   "position": {
                     "x": 0.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 100.0
                   }
                 }
@@ -6607,7 +6577,7 @@
               ],
               "position": {
                 "x": 30.0,
-                "y": 239.0
+                "y": 223.0
               },
               "items": {
                 "K2": 16
@@ -6627,7 +6597,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 0.0
                   }
                 },
@@ -6640,7 +6610,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 5.0
                   }
                 },
@@ -6653,7 +6623,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 10.0
                   }
                 },
@@ -6666,7 +6636,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 15.0
                   }
                 },
@@ -6679,7 +6649,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 20.0
                   }
                 },
@@ -6692,7 +6662,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 25.0
                   }
                 },
@@ -6705,7 +6675,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 30.0
                   }
                 },
@@ -6718,7 +6688,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 35.0
                   }
                 },
@@ -6731,7 +6701,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 40.0
                   }
                 },
@@ -6744,7 +6714,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 45.0
                   }
                 },
@@ -6757,7 +6727,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 50.0
                   }
                 },
@@ -6770,7 +6740,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 55.0
                   }
                 },
@@ -6783,7 +6753,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 60.0
                   }
                 },
@@ -6796,7 +6766,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 65.0
                   }
                 },
@@ -6809,7 +6779,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 70.0
                   }
                 },
@@ -6822,7 +6792,7 @@
                   },
                   "position": {
                     "x": 30.0,
-                    "y": 239.0,
+                    "y": 223.0,
                     "z": 75.0
                   }
                 }
@@ -6832,7 +6802,7 @@
         }
       ],
       "total_boxes": 471,
-      "utilization": 58.98,
+      "utilization": 62.49,
       "dimensions": {
         "width": 92.5,
         "length": 473,
@@ -6842,6 +6812,6 @@
   ],
   "total_boxes": 471,
   "total_containers": 1,
-  "overall_utilization": 58.98,
-  "utilization": 58.98
+  "overall_utilization": 62.49,
+  "utilization": 62.49
 }
