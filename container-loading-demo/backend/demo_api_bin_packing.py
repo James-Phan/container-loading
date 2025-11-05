@@ -9,6 +9,7 @@ from typing import List, Dict, Any, Optional
 from laff_bin_packing_3d import LAFFBinPacking3D
 from guided_packing_3d import GuidedPackingAlgorithm
 from z_first_packing_3d import ZFirstPackingAlgorithm
+from simple_index_packing_3d import SimpleIndexPackingAlgorithm
 from output_formatter_3d import OutputFormatter3D
 import os
 
@@ -52,7 +53,7 @@ class Box(BaseModel):
 
 class CalculateRequest(BaseModel):
     boxes: List[Box]
-    algorithm: Optional[str] = Field(default="laff", description="Packing algorithm: 'laff', 'guided', or 'z_first'")
+    algorithm: Optional[str] = Field(default="laff", description="Packing algorithm: 'laff', 'guided', 'z_first', or 'simple_index'")
 
 
 class LayoutResult(BaseModel):
@@ -62,7 +63,7 @@ class LayoutResult(BaseModel):
 
 @app.get("/health", summary="Health Check")
 async def health_check():
-    return {"status": "ok", "version": "3.0.0", "algorithms": ["laff", "guided", "z_first"]}
+    return {"status": "ok", "version": "3.0.0", "algorithms": ["laff", "guided", "z_first", "simple_index"]}
 
 
 @app.get("/api/test-data", summary="Get Test Data")
@@ -115,8 +116,9 @@ async def calculate_layout(request: CalculateRequest):
     - 'laff': LAFF (Largest Area Fit First) - sorts by area, finds largest space
     - 'guided': Guided Packing - uses manual layout template, fills width (X) before height (Z)
     - 'z_first': Z-First Packing - fills height (Z) before width (X) to maximize vertical utilization
+    - 'simple_index': Simple Index-Based - packs boxes theo thứ tự index trong array, fill cell-by-cell
     
-    Recommended: Use 'guided' or 'z_first' for better packing efficiency (fewer containers, shorter length)
+    Recommended: Use 'guided', 'z_first', or 'simple_index' for better packing efficiency
     """
     try:
         # Convert boxes to list of dicts (Pydantic v2: use model_dump, v1: dict still works)
@@ -139,6 +141,10 @@ async def calculate_layout(request: CalculateRequest):
         elif algorithm == "z_first":
             # Use Z-First Packing (Z-first, stack vertically before spreading horizontally)
             packer = ZFirstPackingAlgorithm(CONTAINER_DIMS)
+            containers = packer.pack_boxes(boxes)
+        elif algorithm == "simple_index":
+            # Use Simple Index-Based Cell Packing (pack theo thứ tự index, fill cell-by-cell)
+            packer = SimpleIndexPackingAlgorithm(CONTAINER_DIMS)
             containers = packer.pack_boxes(boxes)
         else:
             # Use LAFF as default/fallback
